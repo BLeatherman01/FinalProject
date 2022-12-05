@@ -11,6 +11,11 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { SearchedPlantComponent } from './searched-plant/searched-plant.component';
 
+import { LoginComponent } from './login/login.component';
+import { MyGardenComponent } from './my-garden/my-garden.component';
+import { POTDComponent } from './potd/potd.component';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +23,13 @@ import { SearchedPlantComponent } from './searched-plant/searched-plant.componen
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
-    SearchedPlantComponent
+
+    SearchedPlantComponent,
+    LoginComponent,
+    MyGardenComponent,
+    POTDComponent,
+
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,7 +39,12 @@ import { SearchedPlantComponent } from './searched-plant/searched-plant.componen
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
       { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'searched-plant', component: SearchedPlantComponent },
+
+      { path: 'SearchedPlant', component: SearchedPlantComponent},
+      { path: 'Login', component: LoginComponent},
+      { path: 'MyGarden', component: MyGardenComponent},
+      { path: 'POTD', component: POTDComponent}
+
     ])
   ],
   providers: [],

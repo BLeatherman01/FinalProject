@@ -35,3 +35,4 @@ export interface DatumMeta {
 export interface SearchPlantMeta {
     total: number;
 }
+
