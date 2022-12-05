@@ -4,7 +4,7 @@ namespace FinalProjectGarden.Models
 {
     public class PlantsDAL
     {
-        secret key;
+        Secret key;
         public SearchedPlant GetSearchedPlants(string searched)
         {
             var client = new RestClient($"https://api.floracodex.com/v1/plants?key={key}&q={searched}");

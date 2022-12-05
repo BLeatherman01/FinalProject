@@ -1,1 +1,19 @@
-<p>searched-plant works!</p>
+<h1>Plants</h1>
+
+<p>Search Plants</p>
+
+<input type="text" [(ngModel)]="searchPlants" />
+
+<button (click)="getPlantDetails()"> Search for {{searchPlants}}</button>
+
+<div>
+    <ul>
+        <li *ngFor="let p of list; index as i">
+            <!-- <p>{{i}}</p> -->
+            
+            <p>Name: {{p.common_name}}</p>
+
+            <!-- <p>Name: {{p.data[3].common_name}}</p> -->
+        </li>
+    </ul>
+</div>
