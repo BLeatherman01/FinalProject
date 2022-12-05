@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "FinalProjectGarden"
+  "defaultProject": "FinalProjectGarden",
+  "cli": {
+    "analytics": "cc986813-49e7-4be0-8a3a-6a1d7cd42cc2"
+  }
 }
