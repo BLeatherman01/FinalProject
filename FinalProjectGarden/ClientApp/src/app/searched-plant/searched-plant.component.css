@@ -1,0 +1,32 @@
+.searchedplantz {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    /* max-width: 300px; */
+    width: 300px;
+    margin: 10px;
+    text-align: center;
+    font-family: arial;
+    flex-direction: column;
+    padding: 15px;
+    background-color: rgb(0, 116, 25);
+    border: 3px solid black;
+    border-radius: 8px;
+  }
+
+
+.item-container {
+    width: 80%;
+    background-color: rgba(0, 0, 0,);
+    padding: 40px;
+    border-radius: 8px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    display: flex;
+    align-content: flex-start;
+    justify-content: space-around;
+
+}
+.item-list{
+    margin: 0;
+    padding: 15px;
+    list-style: none;
+}

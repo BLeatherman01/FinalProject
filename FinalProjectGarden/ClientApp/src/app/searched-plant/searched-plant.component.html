@@ -6,15 +6,16 @@
 
 <button (click)="getPlantDetails()"> Search for {{searchPlants}}</button>
 
-<div>
-    <ul>
-        <li *ngFor="let p of list; index as i">
-            <!-- <p>{{i}}</p> -->
+<div class="item-container">
+    <ol class ="item-list" *ngFor="let p of list; index as i">
+        <li class="searchedplantz">
             
             <p>Name: {{p.common_name}}</p>
-
-            <!-- <p>Name: {{p.data[3].common_name}}</p> -->
+            <p>Family: {{p.family}}</p>
+            <p></p>
+            <button type="button">Add to Garden!</button>
+            
         </li>
-    </ul>
+    </ol>
 </div>
 
