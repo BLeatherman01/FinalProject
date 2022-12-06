@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Hit, SearchImage } from '../searched-images';
+import { SearchedImagesService } from '../searched-images.service';
 import { Datum, SearchPlant } from '../searched-plant';
 import { SearchedPlantService } from '../searched-plant.service';
 
@@ -9,12 +11,13 @@ import { SearchedPlantService } from '../searched-plant.service';
 })
 export class SearchedPlantComponent implements OnInit {
   results: SearchPlant = {} as SearchPlant;
-
+  imageResults: SearchImage = {} as SearchImage;
+  imageList: Hit [] = [];
   searchPlants: string = '';
-
+  searchImage: string = ''; 
   list: Datum[] = [];
 
-  constructor(private plantApi: SearchedPlantService) {}
+  constructor(private plantApi: SearchedPlantService, private ImageApi :SearchedImagesService) {}
 
   ngOnInit(): void {}
 
@@ -27,5 +30,15 @@ export class SearchedPlantComponent implements OnInit {
         console.log('second', result);
         console.log(this.results);
       });
-  }
+    }
+    getImageDetails(): void {
+      this.ImageApi
+      .getImages(this.searchImage)
+      .subscribe((result: SearchImage) => {
+      this.imageResults = result;
+      this.imageList = this.imageResults.hits;
+      console.log(this.imageResults);
+      })
+
+    }
 }
