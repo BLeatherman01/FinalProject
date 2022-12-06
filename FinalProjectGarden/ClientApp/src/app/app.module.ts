@@ -14,6 +14,8 @@ import { SearchedPlantComponent } from './searched-plant/searched-plant.componen
 import { LoginComponent } from './login/login.component';
 import { MyGardenComponent } from './my-garden/my-garden.component';
 import { POTDComponent } from './potd/potd.component';
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { Secret } from './secret';
 
 
 @NgModule({
@@ -23,6 +25,7 @@ import { POTDComponent } from './potd/potd.component';
     HomeComponent,
     CounterComponent,
     FetchDataComponent,
+    
 
     SearchedPlantComponent,
     LoginComponent,
@@ -35,6 +38,7 @@ import { POTDComponent } from './potd/potd.component';
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    SocialLoginModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'counter', component: CounterComponent },
@@ -47,7 +51,20 @@ import { POTDComponent } from './potd/potd.component';
 
     ])
   ],
-  providers: [],
+  providers: [{
+  	provide: 'SocialAuthServiceConfig',
+  	useValue: {
+    	autoLogin: false,
+    	providers: [
+      	{
+        	id: GoogleLoginProvider.PROVIDER_ID,
+        	provider: new GoogleLoginProvider(
+          	Secret.googleAuth
+        	)
+      	}
+    	]
+  	} as SocialAuthServiceConfig,
+	}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

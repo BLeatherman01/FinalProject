@@ -1,3 +1,5 @@
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
+import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 
 @Component({
@@ -5,9 +7,27 @@ import { Component } from '@angular/core';
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent {
-  isExpanded = false;
 
+export class NavMenuComponent implements OnInit {
+  isExpanded = false;
+  user: SocialUser = {} as SocialUser;
+  loggedIn: boolean = false;
+
+
+  constructor(private authService: SocialAuthService) { }
+  
+  ngOnInit(): void {
+
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+    });
+  }
+
+  signOut(): void {
+    this.authService.signOut();
+  }
+  
   collapse() {
     this.isExpanded = false;
   }
@@ -15,4 +35,6 @@ export class NavMenuComponent {
   toggle() {
     this.isExpanded = !this.isExpanded;
   }
+
+
 }

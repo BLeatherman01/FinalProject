@@ -40,14 +40,15 @@
               >My Garden</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/Login']"
-              >Login</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" [routerLink]="['/searched-plant']"
               >Search Plant</a
             >
           </li>
+          <li class="nav-item">
+            <asl-google-signin-button *ngIf="!loggedIn" type='icon' size='medium'></asl-google-signin-button>
+            <button class="btn btn-outline-dark" *ngIf="loggedIn"  (click)="signOut()">Sign Out
+            </button>
+            </li>
         </ul>
       </div>
     </div>
