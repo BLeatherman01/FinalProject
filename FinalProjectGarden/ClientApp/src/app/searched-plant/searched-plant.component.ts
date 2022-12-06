@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Hit, SearchImage } from '../searched-images';
-import { SearchedImagesService } from '../searched-images.service';
-import { Datum, SearchPlant } from '../searched-plant';
-import { SearchedPlantService } from '../searched-plant.service';
+import { Hit, SearchImage } from '../Services/searched-images';
+import { SearchedImagesService } from '../Services/searched-images.service';
+import { Datum, SearchPlant } from '../Services/searched-plant';
+import { SearchedPlantService } from '../Services/searched-plant.service';
 
 @Component({
   selector: 'app-searched-plant',
@@ -12,12 +12,15 @@ import { SearchedPlantService } from '../searched-plant.service';
 export class SearchedPlantComponent implements OnInit {
   results: SearchPlant = {} as SearchPlant;
   imageResults: SearchImage = {} as SearchImage;
-  imageList: Hit [] = [];
+  imageList: Hit[] = [];
   searchPlants: string = '';
-  searchImage: string = ''; 
-  list: Datum[] = [];
 
-  constructor(private plantApi: SearchedPlantService, private ImageApi :SearchedImagesService) {}
+  list: Datum[] = [];
+  // images: any = [];
+  constructor(
+    private plantApi: SearchedPlantService,
+    private ImageApi: SearchedImagesService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -27,18 +30,24 @@ export class SearchedPlantComponent implements OnInit {
       .subscribe((result: SearchPlant) => {
         this.results = result;
         this.list = this.results.data;
-        console.log('second', result);
         console.log(this.results);
+        this.getImageDetails();
       });
-    }
-    getImageDetails(): void {
-      this.ImageApi
-      .getImages(this.searchImage)
-      .subscribe((result: SearchImage) => {
-      this.imageResults = result;
-      this.imageList = this.imageResults.hits;
-      console.log(this.imageResults);
-      })
-
-    }
+  }
+  getImageDetails(): void {
+    this.ImageApi.getImages(this.searchPlants).subscribe(
+      (result: SearchImage) => {
+        this.imageResults = result;
+        this.imageList = this.imageResults.hits;
+        console.log(this.imageResults);
+      }
+    );
+  }
+  // getImageDetails(): void {
+  //   this.ImageApi
+  //   .getImages(this.searchImage)
+  //   .subscribe(response => {
+  //     this.images = response;
+  //   });
+  // }
 }
