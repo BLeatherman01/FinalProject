@@ -4,16 +4,16 @@
 
 <input type="text" [(ngModel)]="searchPlants" />
 
-<button (click)="getPlantDetails()"> Search for {{searchPlants}}</button>
+<button (click)="getPlantDetails(); getImageDetails();"> Search for {{searchPlants}}</button>
 
 <div>
-    <ul>
+    <ul *ngFor="let image of imageList; index as i" >
         <li *ngFor="let p of list; index as i">
-            <!-- <p>{{i}}</p> -->
+           <p> image:{{image.tags}}</p>
             
             <p>Name: {{p.common_name}}</p>
 
-            <!-- <p>Name: {{p.data[3].common_name}}</p> -->
+          
         </li>
     </ul>
 </div>
