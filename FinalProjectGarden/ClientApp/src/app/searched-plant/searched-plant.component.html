@@ -6,15 +6,17 @@
 
 <button (click)="getPlantDetails(); getImageDetails();"> Search for {{searchPlants}}</button>
 
-<div>
-    <ul *ngFor="let image of imageList; index as i" >
-        <li *ngFor="let p of list; index as i">
-           <p> image:{{image.tags}}</p>
+
+<div class="item-container" >
+    <ol class ="item-list" *ngFor="let image of imageList; index as i">
+        <li class="searchedplantz" *ngFor="let p of list; index as i">
             
             <p>Name: {{p.common_name}}</p>
+            <p>Family: {{p.family}}</p>
+            <p> image:{{image.tags}}</p>
+            <button type="button">Add to Garden!</button>
 
-          
         </li>
-    </ul>
+    </ol>
 </div>
 
