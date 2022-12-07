@@ -9,7 +9,7 @@
         <li class="item" [routerLinkActive]="['link-active']">
           <a class="link" [routerLink]="['/POTD']">Random Plant</a>
         </li>
-        <li class="item" [routerLinkActive]="['link-active']">
+        <li class="item" [routerLinkActive]="['link-active']" *ngIf="loggedIn">
           <a class="link" [routerLink]="['/MyGarden']">My Garden</a>
         </li>
         <li class="item">

@@ -1,18 +1,23 @@
 
 <div *ngIf="loggedIn">
-	<!-- <img src="{{ user.photoUrl }}">-->
-	<h1>Welcome to {{user.name}}'s Garden!</h1>
-	<h2>Recent Plants</h2>
+	<img src="{{ user.photoUrl }}">
 	<div>
-	<p class="plant-list">Recent plants listed </p>
-	</div>
-	
-	<h3>My Gardens</h3>
-	<div class="garden-wrapper">
-	plant data 
+	<h4>{{ user.name }}</h4>
+	<p>{{ user.email }}</p>
+	<!--<p>{{ user.id }}</p> Google Auth ID to log in SQL-->
 	</div>
 </div>
 
 <div *ngIf="!loggedIn">   
 	<p class="user-name">Log in to see user info</p>
+</div>
+
+<h2>Recent Plants</h2>
+<div>
+	<p class="plant-list">Recent plants listed </p>
+</div>
+
+<h3>My Gardens</h3>
+<div class="garden-wrapper">
+	plant data 
 </div>

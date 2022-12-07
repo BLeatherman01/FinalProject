@@ -1,6 +1,7 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
+import { UsersService } from '../Services/users.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -14,13 +15,14 @@ export class NavMenuComponent implements OnInit {
   loggedIn: boolean = false;
 
 
-  constructor(private authService: SocialAuthService) { }
+  constructor(private authService: SocialAuthService, private UsersService: UsersService) { }
   
   ngOnInit(): void {
 
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = (user != null);
+      this.UsersService.AddUser(this.user.name, this.user.id);
     });
   }
 
