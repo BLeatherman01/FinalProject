@@ -1,3 +1,4 @@
+
 <div *ngIf="loggedIn">
 	<img src="{{ user.photoUrl }}">
 	<div>
@@ -7,5 +8,15 @@
 </div>
 
 <div *ngIf="!loggedIn">   
-	<p>Log in to see user info</p>
+	<p class="user-name">Log in to see user info</p>
+</div>
+
+<h2>Recent Plants</h2>
+<div>
+	<p class="plant-list">Recent plants listed </p>
+</div>
+
+<h3>My Gardens</h3>
+<div class="garden-wrapper">
+	plant data 
 </div>

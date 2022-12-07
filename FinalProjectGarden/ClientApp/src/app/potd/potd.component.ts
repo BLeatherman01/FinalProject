@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Hit, SearchImage } from '../Services/searched-images';
 import { SearchedImagesService } from '../Services/searched-images.service';
-import { Datum, SearchPlant } from '../Services/searched-plant';
+import { Plant, SearchPlant } from '../Services/searched-plant';
 import { SearchedPlantService } from '../Services/searched-plant.service';
 
 @Component({
@@ -18,7 +18,7 @@ export class POTDComponent implements OnInit {
   searchPlants: string = '';
   commonName: string = '';
 
-  list: Datum[] = [];
+  list: Plant[] = [];
 
 
   RandomNameArray : string[] = ['"Sansevieria"','"Helianthus annuus"','"Tiger Lily"','"Cynara cardunculus"','"Woodland Strawberry"','"Gonialoe variegata"'];
