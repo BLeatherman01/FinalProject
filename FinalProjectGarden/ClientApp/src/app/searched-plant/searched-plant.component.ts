@@ -13,10 +13,12 @@ export class SearchedPlantComponent implements OnInit {
   results: SearchPlant = {} as SearchPlant;
   imageResults: SearchImage = {} as SearchImage;
   imageList: Hit[] = [];
+  plantImage: Hit = {} as Hit;
   searchPlants: string = '';
+  commonName: string = '';
 
   list: Datum[] = [];
-  // images: any = [];
+
   constructor(
     private plantApi: SearchedPlantService,
     private ImageApi: SearchedImagesService
@@ -40,14 +42,8 @@ export class SearchedPlantComponent implements OnInit {
         this.imageResults = result;
         this.imageList = this.imageResults.hits;
         console.log(this.imageResults);
+        this.plantImage = this.imageList[0];
       }
     );
   }
-  // getImageDetails(): void {
-  //   this.ImageApi
-  //   .getImages(this.searchImage)
-  //   .subscribe(response => {
-  //     this.images = response;
-  //   });
-  // }
 }

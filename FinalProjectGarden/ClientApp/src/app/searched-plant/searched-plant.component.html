@@ -1,20 +1,15 @@
-<h1>Plants</h1>
-
-<p>Search Plants</p>
-
-<input type="text" [(ngModel)]="searchPlants" />
-
-<button (click)="getPlantDetails();"> Search for {{searchPlants}}</button>
-
+<h1>Search Plants</h1>
 <div class="item-container">
-    <ul class="item-list">
+    <div class="input-container">
+        <input type="text" [(ngModel)]="searchPlants" />
+        <button (click)="getPlantDetails();"> Search for {{searchPlants}}</button>
+    </div>
+    <ul class="list-items">
         <li class="searchedplantz" *ngFor="let p of list; index as i">
             <p>Name: {{p.common_name}} </p>
             <p>Family: {{p.family}}</p>
-            <button type="button">Add to Garden!</button>
-        </li>
-        <li *ngFor="let image of imageList">
-            <img src="{{image.previewURL}}">
+            <img src="{{plantImage.previewURL}}">
+            <button class="ask-button" type="button">Add to Garden!</button>
         </li>
     </ul>
 </div>
