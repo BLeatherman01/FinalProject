@@ -10,7 +10,7 @@
                 <p>Name: {{p.common_name}} </p>
                 <p>Family: {{p.family}}</p>
                 <img src="{{imageList[i]}}">
-                <button class="ask-button" type="button">Add to Garden!</button>
+                <button class="ask-button" type="button" (click)="AddToGarden(p,imageList[i])">Add to Garden!</button>
             </li>
         </div>
     </ul>

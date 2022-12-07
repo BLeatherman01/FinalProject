@@ -5,7 +5,7 @@ namespace FinalProjectGarden.Models;
 
 public partial class MyGarden
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
     public string? GardenName { get; set; }
 

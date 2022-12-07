@@ -7,7 +7,7 @@ export interface SearchPlant {
 }
 
 export interface Plant {
-    id?:              string;
+    id:              string;
     author?:          string;
     common_name:     string;
     slug?:            string;

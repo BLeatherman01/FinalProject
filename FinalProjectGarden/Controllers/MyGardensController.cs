@@ -77,6 +77,7 @@ namespace FinalProjectGarden.Controllers
         [HttpPost]
         public async Task<ActionResult<MyGarden>> PostMyGarden(MyGarden myGarden)
         {
+            myGarden.Id = null;
             _context.MyGardens.Add(myGarden);
             await _context.SaveChangesAsync();
 
