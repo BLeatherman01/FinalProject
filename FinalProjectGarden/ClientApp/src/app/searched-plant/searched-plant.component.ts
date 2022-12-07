@@ -32,7 +32,7 @@ export class SearchedPlantComponent implements OnInit {
       .subscribe((result: SearchPlant) => {
         this.results = result;
         this.list = this.results.data;
-        console.log(this.results);
+        console.log("hello", this.results.data[2].common_name);
         this.getImageDetails();
       });
   }
@@ -42,7 +42,7 @@ export class SearchedPlantComponent implements OnInit {
         this.imageResults = result;
         this.imageList = this.imageResults.hits;
         console.log(this.imageResults);
-        this.plantImage = this.imageList[0];
+        this.plantImage = this.imageList[2];
       }
     );
   }
