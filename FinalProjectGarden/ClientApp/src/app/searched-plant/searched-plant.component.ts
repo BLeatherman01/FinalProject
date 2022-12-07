@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { MyGarden } from '../Services/my-garden';
+import { MyGardenService } from '../Services/my-garden.service';
 import { Hit, SearchImage } from '../Services/searched-images';
 import { SearchedImagesService } from '../Services/searched-images.service';
 import { Plant, SearchPlant } from '../Services/searched-plant';
 import { SearchedPlantService } from '../Services/searched-plant.service';
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 
 @Component({
   selector: 'app-searched-plant',
   templateUrl: './searched-plant.component.html',
   styleUrls: ['./searched-plant.component.css'],
 })
+
 export class SearchedPlantComponent implements OnInit {
   results: SearchPlant = {} as SearchPlant;
   imageResults: SearchImage = {} as SearchImage;
@@ -18,13 +22,30 @@ export class SearchedPlantComponent implements OnInit {
   commonName: Plant = {} as Plant
   name: string = '';
   list: Plant[] = [];
+  user: SocialUser = {} as SocialUser;
+  loggedIn: boolean = false;
+
+
 
   constructor(
     private plantApi: SearchedPlantService,
-    private ImageApi: SearchedImagesService
+    private ImageApi: SearchedImagesService,
+    private gardenService : MyGardenService,
+    private authService: SocialAuthService
   ) {}
 
   ngOnInit(): void {}
+
+  AddToGarden(plant:Plant, imageurl : string): void {
+    let newPlant : MyGarden = { id : 0 , gardenId : 0, googleId : this.user.id, plantId: plant.id, plantImageUrl: imageurl }
+    this.gardenService.PlantingGarden(newPlant).subscribe((result : MyGarden)=>{
+      console.log(result);
+    })
+
+  }
+
+
+
 
   getPlantDetails(): void {
     this.plantApi
