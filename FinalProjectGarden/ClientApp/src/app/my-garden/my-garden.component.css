@@ -5,10 +5,23 @@
     font-size: 30px;
     
 }
+.item-container {
+  /* flex-wrap: wrap; */
+  display: flex;
+  /* align-content: flex-start; */
+  flex-direction: column;
+  justify-content: space-around;
+  width: 80%;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  border-radius: 8px;
+  margin: 0 auto;
+
+}
 
 h2 {
   color: white;
-  padding-top: 100px;
+  padding-top: 30px;
   font-size: 50px;
   display: flex;
   justify-content: center;
@@ -20,12 +33,18 @@ h2 {
 }
 .garden-wrapper{
    color: white; 
+   justify-content: center;
+   display: flex;
+}
+.my-garden-text{
+  color: white;
+  justify-content: center;
+  display: flex;
 }
 
 h3{
     color: white;
     font-size: 50px;
-    padding: 300px;
     display: flex;
     justify-content: center;
 }
@@ -35,10 +54,8 @@ h1 {
   display: flex;
   justify-content: center;
 }
-
-h1 {
-  color: white;
-  font-size: 60px;
+.gardenbuttonz{
+  color:white;
+  justify-content: last baseline;
   display: flex;
-  justify-content: center;
 }

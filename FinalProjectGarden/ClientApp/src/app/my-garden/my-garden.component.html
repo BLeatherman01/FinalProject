@@ -1,4 +1,4 @@
-
+<div class="item-container">
 <div *ngIf="loggedIn">
 	<!-- <img src="{{ user.photoUrl }}">-->
 	<h1>Welcome to {{user.name}}'s Garden!</h1>
@@ -11,8 +11,27 @@
 	<div class="garden-wrapper">
 	plant data 
 	</div>
+
+	<div class ="my-garden-text">
+	Here Please feel free to add context to the plants you have added to your garden!
+	</div>
+	<div class="gardenbuttonz">Date Planted:<input type="date" min="2022-12-07"></div>
+	<div class="gardenbuttonz">Pick Bloom:<input type="date" min="2022-12-07"></div>
+	<div class="gardenbuttonz">Watering Frequency in days:<input type="number" min="1" max="14"></div>
+	<div class="gardenbuttonz">Season:
+		<select id="seasons"name="seasons">
+			<option>Summer</option>
+			<option>Autumn</option>
+			<option>Winter</option>
+			<option>Spring</option>
+		</select>
+	</div>
+	<div class="gardenbuttonz"><input type="submit"></div>
+
 </div>
 
 <div *ngIf="!loggedIn">   
 	<p class="user-name">Log in to see user info</p>
+</div>
+
 </div>
