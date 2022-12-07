@@ -35,3 +35,10 @@ h1 {
   display: flex;
   justify-content: center;
 }
+
+h1 {
+  color: white;
+  font-size: 60px;
+  display: flex;
+  justify-content: center;
+}

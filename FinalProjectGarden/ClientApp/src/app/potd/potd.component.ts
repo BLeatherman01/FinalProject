@@ -35,9 +35,7 @@ export class POTDComponent implements OnInit {
         console.log(this.results)
         this.results = result;
         this.list = this.results.data;
-        console.log(this.list, "first List")
         this.list.splice(1);
-        console.log(this.list, "Modified list")
         this.getImageDetails();
       });
   }
