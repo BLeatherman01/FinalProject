@@ -10,6 +10,6 @@ export class MyGardenService {
 
   constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {}
 
-  PlantingGarden(garden:MyGarden) : Observable<MyGarden>{
-    return this.http.post<MyGarden>(this.baseUrl + "api/MyGardens", garden);}
+  PlantingGarden(garden:MyGarden,googleid:string) : Observable<MyGarden>{
+    return this.http.post<MyGarden>(this.baseUrl + `api/MyGardens?googleId=${googleid}`, garden);}
 }

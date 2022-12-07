@@ -13,6 +13,8 @@ public partial class User
 
     [System.Text.Json.Serialization.JsonIgnore]
     public virtual ICollection<MyGarden> MyGardens { get; } = new List<MyGarden>();
+
+
     [System.Text.Json.Serialization.JsonIgnore]
     public virtual ICollection<RecentPlant> RecentPlants { get; } = new List<RecentPlant>();
 }

@@ -34,11 +34,18 @@ export class SearchedPlantComponent implements OnInit {
     private authService: SocialAuthService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = (user != null);
+    });
+
+  }
 
   AddToGarden(plant:Plant, imageurl : string): void {
-    let newPlant : MyGarden = { id : 0 , gardenId : 0, googleId : this.user.id, plantId: plant.id, plantImageUrl: imageurl }
-    this.gardenService.PlantingGarden(newPlant).subscribe((result : MyGarden)=>{
+    let newPlant : MyGarden = { id : 0 , gardenId : 0, plantId: plant.id, plantImageUrl: imageurl }
+    this.gardenService.PlantingGarden(newPlant,this.user.id).subscribe((result : MyGarden)=>{
       console.log(result);
     })
 
