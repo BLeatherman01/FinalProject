@@ -16,7 +16,6 @@ export class SearchedPlantComponent implements OnInit {
   
   searchPlants: string = '';
   commonName: Plant = {} as Plant
-  
   name: string = '';
   list: Plant[] = [];
 
