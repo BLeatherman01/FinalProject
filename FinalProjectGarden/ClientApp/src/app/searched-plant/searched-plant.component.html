@@ -4,12 +4,14 @@
         <input type="text" [(ngModel)]="searchPlants" />
         <button (click)="getPlantDetails();"> Search for {{searchPlants}}</button>
     </div>
-    <ul class="list-items">
-        <li class="searchedplantz" *ngFor="let p of list; index as i">
-            <p>Name: {{p.common_name}} </p>
-            <p>Family: {{p.family}}</p>
-            <img src="{{plantImage.previewURL}}">
-            <button class="ask-button" type="button">Add to Garden!</button>
-        </li>
+    <ul>
+        <div class="list-items" *ngIf="imageList.length === list.length">
+            <li class="searchedplantz" *ngFor="let p of list; index as i">
+                <p>Name: {{p.common_name}} </p>
+                <p>Family: {{p.family}}</p>
+                <img src="{{imageList[i]}}">
+                <button class="ask-button" type="button">Add to Garden!</button>
+            </li>
+        </div>
     </ul>
 </div>

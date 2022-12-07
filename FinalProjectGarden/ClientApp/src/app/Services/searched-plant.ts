@@ -1,17 +1,17 @@
 export interface SearchPlant {
-    data:  Datum[];
+    data:  Plant[];
     self:  string;
     first: string;
     last:  string;
     meta:  SearchPlantMeta;
 }
 
-export interface Datum {
+export interface Plant {
     id?:              string;
     author?:          string;
-    common_name?:     string;
+    common_name:     string;
     slug?:            string;
-    scientific_name?: string;
+    scientific_name: string;
     status?:          string;
     rank?:            string;
     family?:          string;

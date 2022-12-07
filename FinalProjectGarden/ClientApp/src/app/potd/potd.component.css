@@ -1,3 +1,55 @@
-p{
+h1 {
     color: white;
-}
+    font-size: 100px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .item-container {
+    /* flex-wrap: wrap; */
+    display: flex;
+    /* align-content: flex-start; */
+    flex-direction: column;
+    justify-content: space-around;
+    width: 80%;
+    padding: 40px;
+    border-radius: 8px;
+    margin: 0 auto;
+  
+  }
+  .input-container{
+    align-self: center;
+  }
+  .list-items{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    
+  }
+  .searchedplantz {
+    list-style: none;
+    border: 3px solid rgb(0, 0, 0);
+    border-radius: 6px;
+    color: white;
+    background-color: rgba(0, 116, 25);
+    width: 800px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 15px;
+  }
+  .searchedplantz:hover {
+    background-color: #fff;
+    color: #000;
+    transition: background-color 0.3s ease;
+  }
+  
+  .ask-button {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+  }
+  

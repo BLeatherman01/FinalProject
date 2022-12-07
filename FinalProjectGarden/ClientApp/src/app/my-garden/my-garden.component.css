@@ -1,3 +1,28 @@
-p {
+.user-name{
+    color:white;
+    display: flex;
+    justify-content: right;
+    
+}
+
+h2 {
   color: white;
+  padding-top: 100px;
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+}
+.plant-list{
+    color:white;
+}
+.garden-wrapper{
+   color: white; 
+}
+
+h3{
+    color: white;
+    font-size: 50px;
+    padding: 300px;
+    display: flex;
+    justify-content: center;
 }

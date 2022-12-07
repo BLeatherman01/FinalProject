@@ -1,6 +1,5 @@
-.navbar {
-  
-}
+/* .navbar {
+} */
 
 .title {
   font-size: 36px;
@@ -31,14 +30,20 @@
   font-size: 25px;
   margin: 15px;
 }
-a:hover{
- color: white;
- text-decoration: underline;
+a:hover {
+  color: white;
+  text-decoration: underline;
 }
 .item {
   list-style: none;
 }
-.item:last-of-type{
+.item:last-of-type {
   margin-left: 25px;
 }
-
+/* .link-button{
+  color: white;
+  text-decoration: none;
+  font-size: 25px;
+  margin: 50px;
+  
+} */
