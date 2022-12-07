@@ -1,8 +1,13 @@
+using FinalProjectGarden.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<GreenGrassDbContext>(options => options.UseSqlServer(Secret.sqlScaff));
+
 
 var app = builder.Build();
 
