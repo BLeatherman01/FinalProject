@@ -34,6 +34,7 @@ public partial class GreenGrassDbContext : DbContext
             entity.Property(e => e.Description).HasMaxLength(90);
             entity.Property(e => e.GardenId).HasColumnName("GardenID");
             entity.Property(e => e.GardenName).HasMaxLength(25);
+            entity.Property(e => e.Notes).HasMaxLength(250);
             entity.Property(e => e.PickBloom).HasColumnType("date");
             entity.Property(e => e.PlantDate).HasColumnType("date");
             entity.Property(e => e.PlantId)

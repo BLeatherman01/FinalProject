@@ -20,9 +20,7 @@ export class MyGardenService {
   }
 
   GetMyGardens(googleid: string): Observable<MyGarden[]> {
-    return this.http.get<MyGarden[]>(
-      this.baseUrl + `api/MyGardens/${googleid}`
-    );
+    return this.http.get<MyGarden[]>(this.baseUrl + `api/MyGardens/${googleid}`);
   }
 
   UpdateMyGardens(id: number, plant: MyGarden): Observable<MyGarden> {
@@ -33,7 +31,7 @@ export class MyGardenService {
     return this.http.delete<MyGarden>(this.baseUrl + `api/MyGardens/${id}`);
   }
 
-  getSpecificPlant(id: number): Observable<MyGarden> {
-    return this.http.delete<MyGarden>(this.baseUrl + `api/MyGardens/${id}`);
+  getPlantByGarden(id: number): Observable<MyGarden> {
+    return this.http.get<MyGarden>(this.baseUrl + `api/MyGardens/${id}`);
   }
 }
