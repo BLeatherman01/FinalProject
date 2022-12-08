@@ -19,17 +19,26 @@
 
 }
 
-h2 {
+/* h2 {
   color: white;
   padding-top: 30px;
   font-size: 50px;
   display: flex;
   justify-content: center;
-}
+} */
 .plant-list{
     color:white;
-    justify-content: center;
+   
+    list-style: none;
+    border: 3px solid #fff;
+    border-radius: 6px;
+    width: 400px;
+    padding: 22px;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px;
+    
 }
 .garden-wrapper{
    color: white; 
@@ -40,22 +49,28 @@ h2 {
   color: white;
   justify-content: center;
   display: flex;
+  
 }
 
-h3{
+.my-garden-text{
     color: white;
-    font-size: 50px;
+    font-size: 20px;
     display: flex;
     justify-content: center;
 }
-h1 {
+/* h1 {
   color: white;
   font-size: 60px;
   display: flex;
   justify-content: center;
-}
+} */
 .gardenbuttonz{
   color:white;
   justify-content: last baseline;
   display: flex;
+}
+.user-name{
+  color: white;
+  justify-content: left;
+  font-size: 25px;
 }

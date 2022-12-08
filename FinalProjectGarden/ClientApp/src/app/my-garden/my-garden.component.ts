@@ -8,37 +8,67 @@ import { SearchedPlantService } from '../Services/searched-plant.service';
 @Component({
   selector: 'app-my-garden',
   templateUrl: './my-garden.component.html',
-  styleUrls: ['./my-garden.component.css']
+  styleUrls: ['./my-garden.component.css'],
 })
 export class MyGardenComponent implements OnInit {
-
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
   listGardens: MyGarden[] = [];
   apiPlant: Plant[] = [];
-  constructor(private authService: SocialAuthService, private gardenService: MyGardenService, private searchedPlantService: SearchedPlantService) { }
-  
-  ngOnInit(): void {
+  constructor(
+    private authService: SocialAuthService,
+    private gardenService: MyGardenService,
+    private searchedPlantService: SearchedPlantService
+  ) {}
 
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = (user != null);
-      this.gardenService.GetMyGardens(this.user.id).subscribe((result: MyGarden[]) => {
-      this.listGardens = result;
-      //console.log("1"+ this.listGardens[0].plantId);
-      this.listGardens.forEach((pid: MyGarden) => {
-        //console.log(pid.plantId);
-        this.searchedPlantService.getPlantById(pid.plantId).subscribe((result:Plant)=> {
-          this.apiPlant.push(result);
-          //console.log("2"+ result.common_name);
-        })}
-      )
-    });
-  })}
+  ngOnInit(): void {
+    //   this.authService.authState.subscribe((user) => {
+    //     this.user = user;
+    //     this.loggedIn = (user != null);
+    //     this.gardenService.GetMyGardens(this.user.id).subscribe((result: MyGarden[]) => {
+    //     this.listGardens = result;
+    //     //console.log("1"+ this.listGardens[0].plantId);
+    //     this.listGardens.forEach((pid: MyGarden) => {
+    //       //console.log(pid.plantId);
+    //       this.searchedPlantService.getPlantById(pid.plantId).subscribe((result:Plant)=> {
+    //         this.apiPlant.push(result);
+    //         //console.log("2"+ result.common_name);
+    //       })}
+    //     )
+    //   });
+
+    // })
+    this.getUserGarden();
+  }
 
   RemoveFromGarden(index: number): void {
-    this.gardenService.DeleteMyGardens(this.listGardens[index].id).subscribe((result: MyGarden)=>{
-      this.listGardens.splice(index, 1);
-      console.log(result);
-    })}
+    this.gardenService
+      .DeleteMyGardens(this.listGardens[index].id)
+      .subscribe((result: MyGarden) => {
+        this.listGardens.splice(index, 1);
+        console.log(result);
+      });
+  }
+
+  getUserGarden() {
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = user != null;
+      this.gardenService
+        .GetMyGardens(this.user.id)
+        .subscribe((result: MyGarden[]) => {
+          this.listGardens = result;
+          //console.log("1"+ this.listGardens[0].plantId);
+          this.listGardens.forEach((pid: MyGarden) => {
+            //console.log(pid.plantId);
+            this.searchedPlantService
+              .getPlantById(pid.plantId)
+              .subscribe((result: Plant) => {
+                this.apiPlant.push(result);
+                //console.log("2"+ result.common_name);
+              });
+          });
+        });
+    });
+  }
 }
