@@ -35,4 +35,10 @@ export class MyGardenComponent implements OnInit {
       )
     });
   })}
+
+  RemoveFromGarden(index: number): void {
+    this.gardenService.DeleteMyGardens(this.listGardens[index].id).subscribe((result: MyGarden)=>{
+      this.listGardens.splice(index, 1);
+      console.log(result);
+    })}
 }

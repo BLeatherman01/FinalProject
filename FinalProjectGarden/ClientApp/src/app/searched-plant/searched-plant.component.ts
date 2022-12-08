@@ -25,8 +25,6 @@ export class SearchedPlantComponent implements OnInit {
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
 
-
-
   constructor(
     private plantApi: SearchedPlantService,
     private ImageApi: SearchedImagesService,
@@ -50,9 +48,6 @@ export class SearchedPlantComponent implements OnInit {
     })
 
   }
-
-
-
 
   getPlantDetails(): void {
     this.plantApi
