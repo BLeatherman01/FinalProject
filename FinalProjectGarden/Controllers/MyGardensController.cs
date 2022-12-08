@@ -28,17 +28,12 @@ namespace FinalProjectGarden.Controllers
         }
 
         // GET: api/MyGardens/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<MyGarden>> GetMyGarden(int id)
+        [HttpGet("{gid}")]
+        public async Task<ActionResult<IEnumerable<MyGarden>>> GetMyGarden(string gid)
         {
-            var myGarden = await _context.MyGardens.FindAsync(id);
-
-            if (myGarden == null)
-            {
-                return NotFound();
-            }
-
-            return myGarden;
+            int id = (int)_context.Users.First(u => u.GoogleId == gid).Id;
+            return await _context.MyGardens.Where(garden => garden.GardenId == id).ToArrayAsync();
+                        
         }
 
         // PUT: api/MyGardens/5

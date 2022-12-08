@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { SearchPlant } from './searched-plant';
+import { Plant, SearchPlant } from './searched-plant';
 import { Secret } from './secret';
 
 @Injectable({
@@ -15,6 +15,12 @@ export class SearchedPlantService {
   getPlants(name: string): Observable<SearchPlant> {
     return this.http.get<SearchPlant>(
       this.baseUrl + '?key=' + Secret.key + '&q=' + name
+    );
+  }
+
+  getPlantById(id: string): Observable<Plant> {
+    return this.http.get<Plant>(
+      this.baseUrl + '/' + id + '?key=' + Secret.key
     );
   }
 }
