@@ -10,4 +10,5 @@ gardenId : number,
 plantId : string,
 plantImageUrl : string,
 // googleId : string
+notes?: string
 }

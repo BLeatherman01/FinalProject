@@ -28,4 +28,6 @@ public partial class MyGarden
     //public string? GoogleId { get; set; }
 
     public virtual User? Garden { get; set; }
+
+    public string? Notes { get; set; }
 }

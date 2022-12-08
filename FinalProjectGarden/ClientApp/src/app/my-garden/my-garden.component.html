@@ -11,18 +11,18 @@
 		<ul>
 			<li class="plant-list" *ngFor="let plant of apiPlant; index as i">
 				<p>{{plant.common_name}}</p>
-				<p> Date Planted:<input type="date" min="2022-12-07"></p>
-				<p> Pick Bloom:<input type="date" min="2022-12-07"></p>
-				<p> Watering Frequency in days:<input type="number" min="1" max="14"></p>
+				<p> Date Planted:<input [(ngModel)]="plantDate[i]" type="date" min="2022-12-07"></p>
+				<p> Pick Bloom:<input [(ngModel)]="pickDate[i]" type="date" min="2022-12-07"></p>
+				<p> Watering Frequency in days:<input [(ngModel)]="waterFreq[i]" type="number" min="1" max="14"></p>
 				<p> Season:
-					<select id="seasons" name="seasons">
+					<select [(ngModel)]="season[i]" id="seasons" name="seasons">
 						<option>Summer</option>
 						<option>Autumn</option>
 						<option>Winter</option>
 						<option>Spring</option>
 					</select>
 				</p>
-				<input type="submit">
+				<button (click)="UpdateGarden(i)">Update plant</button>
 				<button (click)="RemoveFromGarden(i)">Remove plant</button>
 			</li>
 		</ul>
