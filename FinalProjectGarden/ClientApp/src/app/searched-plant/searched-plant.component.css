@@ -6,7 +6,7 @@ h1 {
 }
 
 .item-container {
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
   display: flex;
   /* align-content: flex-start; */
   flex-direction: column;
@@ -16,6 +16,12 @@ h1 {
   padding: 40px;
   border-radius: 8px;
   margin: 0 auto;
+
+
+ 
+
+
+
 
 }
 .input-container{
