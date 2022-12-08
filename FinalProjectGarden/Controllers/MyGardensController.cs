@@ -75,9 +75,10 @@ namespace FinalProjectGarden.Controllers
         // POST: api/MyGardens
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<MyGarden>> PostMyGarden(MyGarden myGarden)
+        public async Task<ActionResult<MyGarden>> PostMyGarden(string googleid , MyGarden myGarden)
         {
             myGarden.Id = null;
+            myGarden.GardenId = (int)_context.Users.First(u => u.GoogleId == googleid).Id;
             _context.MyGardens.Add(myGarden);
             await _context.SaveChangesAsync();
 

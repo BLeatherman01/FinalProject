@@ -7,7 +7,7 @@ pickBloom? : Date,
 wateringFreq? : number,
 season? : string,
 gardenId : number,
-googleId : string,
 plantId : string,
-plantImageUrl : string
+plantImageUrl : string,
+// googleId : string
 }

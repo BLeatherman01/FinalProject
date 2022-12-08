@@ -21,5 +21,11 @@ public partial class MyGarden
 
     public int? GardenId { get; set; }
 
+    public string? PlantId { get; set; }
+
+    public string? PlantImageUrl { get; set; }
+
+    //public string? GoogleId { get; set; }
+
     public virtual User? Garden { get; set; }
 }

@@ -10,7 +10,7 @@ const PROXY_CONFIG = [
       "/api/Users",
       "/api/User",
       "/api/RecentPlants",
-      "/api/MyGarden"
+      "/api/MyGardens"
    ],
     target: target,
     secure: false,
