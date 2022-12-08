@@ -12,4 +12,8 @@ export class MyGardenService {
 
   PlantingGarden(garden:MyGarden,googleid:string) : Observable<MyGarden>{
     return this.http.post<MyGarden>(this.baseUrl + `api/MyGardens?googleId=${googleid}`, garden);}
+
+  GetMyGardens(googleid:string) : Observable<MyGarden[]>{
+    return this.http.get<MyGarden[]>(this.baseUrl + `api/MyGardens/${googleid}`);}
+    
 }
