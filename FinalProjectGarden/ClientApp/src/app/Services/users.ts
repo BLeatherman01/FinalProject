@@ -1,7 +1,5 @@
 export interface Users {
-
-    id : number;
-    userName: string;
-    googleID: string;
-
+  id: number;
+  userName: string;
+  googleID: string;
 }
