@@ -1,12 +1,12 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MyGarden } from '../Services/my-garden';
 import { MyGardenService } from '../Services/my-garden.service';
-import { Hit, SearchImage } from '../Services/searched-images';
+import { SearchImage } from '../Services/searched-images';
 import { SearchedImagesService } from '../Services/searched-images.service';
 import { Plant, SearchPlant } from '../Services/searched-plant';
 import { SearchedPlantService } from '../Services/searched-plant.service';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
-import { SearchImages, Value } from '../Services/search-bing';
+import { SearchImages } from '../Services/search-bing';
 import { BingSearchService } from '../Services/bing-search.service';
 
 @Component({
@@ -16,14 +16,14 @@ import { BingSearchService } from '../Services/bing-search.service';
 })
 export class SearchedPlantComponent implements OnInit {
   results: SearchPlant = {} as SearchPlant;
-  imageResults: SearchImage = {} as SearchImage;
+
   bingImageResults: SearchImages = {} as SearchImages;
 
   bingImageList: string[] = [];
   imageList: string[] = [];
 
   searchPlants: string = '';
-  commonName: Plant = {} as Plant;
+
   name: string = '';
   list: Plant[] = [];
   user: SocialUser = {} as SocialUser;
@@ -47,6 +47,7 @@ export class SearchedPlantComponent implements OnInit {
   AddToGarden(plant: Plant, imageurl: string): void {
     let newPlant: MyGarden = {
       id: 0,
+      gardenName: "",
       gardenId: 0,
       plantId: plant.id,
       plantImageUrl: imageurl,
@@ -64,17 +65,42 @@ export class SearchedPlantComponent implements OnInit {
       .subscribe((result: SearchPlant) => {
         this.results = result;
         this.list = this.results.data;
-      
-        
         let iteration: number = 1;
         this.results.data.forEach((plant: Plant) => {
           let name = plant.common_name;
           this.getBingImage(iteration, name);
-          // this.getImageDetails();
-          console.log(plant);
         });
       });
   }
+  getBingImage(iteration: number, name: string): void {
+    this.bingSearch
+      .getBingSearch(name, iteration)
+      .subscribe((result: SearchImages) => {
+        this.bingImageResults = result;
+        for (let i: number = 0; i < this.list.length; i++) {
+     
+            // console.log("Please help",  this.bingImageResults.value[1].contentUrl.startsWith('http'))
+            // console.log("what is this", this.bingImageList[i] = this.bingImageResults.value[1].contentUrl)
+          if (this.list[i].common_name === this.bingImageResults.queryContext.originalQuery) {
+           
+            // if (!this.bingImageResults.value[1].contentUrl.startsWith("https")) 
+            // {  
+            //   
+            // } 
+            // else 
+            
+              this.bingImageList[i] = this.bingImageResults.value[1].contentUrl
+              // break;;
+            
+          }
+          // else{
+          //   this.bingImageList[i] = '/assets/Garden.jpg';
+          // }
+        }
+      });
+  }
+
+  //***additional image API if needed  */
   // getImageDetails(): void {
   //   this.ImageApi.getImages(this.searchPlants).subscribe(
   //     (result: SearchImage) => {
@@ -88,18 +114,4 @@ export class SearchedPlantComponent implements OnInit {
   //     }
   //   );
   // }
-  getBingImage(iteration: number, name: string): void {
-    this.bingSearch.getBingSearch(name, iteration).subscribe((result: SearchImages) => {
-      this.bingImageResults = result;
-      console.log("image Please", this.bingImageResults.value[0].contentUrl)
-      console.log("Object Please", this.bingImageResults.value[0])
-       for(let i:number =0; i<this.list.length; i++ ){
-          if(this.list[i].common_name === this.bingImageResults.queryContext.originalQuery){
-            this.bingImageList[i]=this.bingImageResults.value[0].contentUrl;
-            break;
-          }
-       }
-      console.log('jump', result);
-    });
-  }
 }
