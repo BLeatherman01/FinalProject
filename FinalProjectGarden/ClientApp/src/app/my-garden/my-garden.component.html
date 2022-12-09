@@ -1,5 +1,5 @@
 <div *ngIf="loggedIn">
-	<img src="{{ user.photoUrl }}">
+	<!-- <img src="{{ user.photoUrl }}"> -->
 	<div>
 		<h3 class="my-garden-text">Hello {{ user.name }}, Please feel free to add context to the plants you have
 			added to your garden!</h3>
@@ -7,7 +7,6 @@
 		<!--<p>{{ user.id }}</p> Google Auth ID to log in SQL-->
 	</div>
 	<div class="item-container">
-
 		<ul>
 			<li class="plant-list" *ngFor="let plant of apiPlant; index as i">
 				<p>{{plant.common_name}}</p>
@@ -26,9 +25,7 @@
 				<button (click)="RemoveFromGarden(i)">Remove plant</button>
 			</li>
 		</ul>
-
 	</div>
-
 	<div *ngIf="!loggedIn">
 		<p class="user-name">Log in to see user info</p>
 	</div>

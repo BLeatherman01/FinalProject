@@ -52,7 +52,8 @@ export class MyGardenComponent implements OnInit {
       .DeleteMyGardens(this.listGardens[index].id)
       .subscribe((result: MyGarden) => {
         this.listGardens.splice(index, 1);
-        console.log(result);
+       
+        // console.log(result);
       });
   }
 
