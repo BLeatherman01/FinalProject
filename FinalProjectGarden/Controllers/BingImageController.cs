@@ -12,44 +12,15 @@ namespace FinalProjectGarden.Controllers
         BingDal api = new BingDal();
 
         
-        [HttpGet("{Searched}")]
-        public BingImageSearch SearchBingImages(string Searched)
+        [HttpGet]
+        public BingImageSearch SearchBingImages(string Searched, int iteration)
         {
+            Thread.Sleep((1000 * iteration));
             BingImageSearch bi = api.GetBingImageSearch(Searched);
-
+            
             return bi;
         }
 
-        // GET: api/<BingImageController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<BingImageController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<BingImageController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<BingImageController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<BingImageController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+       
     }
 }

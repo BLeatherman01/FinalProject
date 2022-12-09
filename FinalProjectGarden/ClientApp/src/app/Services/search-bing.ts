@@ -60,7 +60,7 @@ export interface Value {
   thumbnailURL: string;
   datePublished: Date;
   isFamilyFriendly: boolean;
-  contentURL: string;
+  contentUrl: string;
   hostPageURL: string;
   contentSize: string;
   encodingFormat: EncodingFormat;

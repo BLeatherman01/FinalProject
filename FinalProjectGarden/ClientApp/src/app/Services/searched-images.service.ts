@@ -19,7 +19,7 @@ export class SearchedImagesService {
     );
   }
   getBingImage(name: string): Observable<any> {
-    console.log('bing name', name);
+   
     let headers = new HttpHeaders().set(
       'Ocp-Apim-Subscription-Key',
       Secret.subscriptionKey

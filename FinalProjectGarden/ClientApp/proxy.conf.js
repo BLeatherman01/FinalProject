@@ -11,7 +11,8 @@ const PROXY_CONFIG = [
       "/api/User",
       "/api/RecentPlants",
       "/api/MyGardens",
-      "/api/Garden"
+      "/api/Garden",
+      "/api/BingImage"
    ],
     target: target,
     secure: false,
