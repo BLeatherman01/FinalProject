@@ -36,3 +36,17 @@ export interface SearchPlantMeta {
     total: number;
 }
 
+//export interface wiki {
+//id: string;
+//id:              string;
+//author?:          string;
+//common_name:     string;
+//slug?:            string;
+//scientific_name: string;
+//status?:          string;
+//rank?:            string;
+//family?:          string;
+//genus?:           string;
+//genus_id?:        string;
+///links?:           Links;
+//}
