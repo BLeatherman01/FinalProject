@@ -12,14 +12,13 @@ import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
   templateUrl: './searched-plant.component.html',
   styleUrls: ['./searched-plant.component.css'],
 })
-
 export class SearchedPlantComponent implements OnInit {
   results: SearchPlant = {} as SearchPlant;
   imageResults: SearchImage = {} as SearchImage;
-  imageList: string [] = [];
-  
+  imageList: string[] = [];
+
   searchPlants: string = '';
-  commonName: Plant = {} as Plant
+  commonName: Plant = {} as Plant;
   name: string = '';
   list: Plant[] = [];
   user: SocialUser = {} as SocialUser;
@@ -28,25 +27,31 @@ export class SearchedPlantComponent implements OnInit {
   constructor(
     private plantApi: SearchedPlantService,
     private ImageApi: SearchedImagesService,
-    private gardenService : MyGardenService,
+    private gardenService: MyGardenService,
     private authService: SocialAuthService
   ) {}
 
   ngOnInit(): void {
-
     this.authService.authState.subscribe((user) => {
       this.user = user;
-      this.loggedIn = (user != null);
+      this.loggedIn = user != null;
     });
 
+    
   }
 
-  AddToGarden(plant:Plant, imageurl : string): void {
-    let newPlant : MyGarden = { id : 0 , gardenId : 0, plantId: plant.id, plantImageUrl: imageurl }
-    this.gardenService.PlantingGarden(newPlant,this.user.id).subscribe((result : MyGarden)=>{
-      console.log(result);
-    })
-
+  AddToGarden(plant: Plant, imageurl: string): void {
+    let newPlant: MyGarden = {
+      id: 0,
+      gardenId: 0,
+      plantId: plant.id,
+      plantImageUrl: imageurl,
+    };
+    this.gardenService
+      .PlantingGarden(newPlant, this.user.id)
+      .subscribe((result: MyGarden) => {
+        console.log(result);
+      });
   }
 
   getPlantDetails(): void {
@@ -55,28 +60,31 @@ export class SearchedPlantComponent implements OnInit {
       .subscribe((result: SearchPlant) => {
         this.results = result;
         this.list = this.results.data;
-       this.results.data.forEach((plant: Plant) => {
-           let name =plant.common_name;
-           console.log("check",name)  
+        this.results.data.forEach((plant: Plant) => {
+          let name = plant.common_name;
+          console.log('check', name);
           this.getImageDetails();
-          console.log(plant)
-      })
-      
+          // this.getBingImage();
+          console.log(plant);
+        });
       });
   }
   getImageDetails(): void {
     this.ImageApi.getImages(this.searchPlants).subscribe(
       (result: SearchImage) => {
-
-        if(result.hits[0]){
-        console.log("check results", result.hits[0].previewURL)
+        if (result.hits[0]) {
+          console.log('check results', result.hits[0].previewURL);
           this.imageList.push(result.hits[0].previewURL);
-        console.log("hits", result.hits[0]);
-        }
-        else{
-          this.imageList.push("/assets/Garden.jpg");
+          console.log('hits', result.hits[0]);
+        } else {
+          this.imageList.push('/assets/Garden.jpg');
         }
       }
+    );
+  }
+  getBingImage(): void {
+    this.ImageApi.getBingImage(this.searchPlants).subscribe((result: any) =>
+      console.log("jump", result)
     );
   }
 }
