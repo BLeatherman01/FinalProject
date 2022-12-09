@@ -6,12 +6,16 @@
 		<!-- <p>{{ user.email }}</p> -->
 		<!--<p>{{ user.id }}</p> Google Auth ID to log in SQL-->
 	</div>
-	<div class="item-container">
-		<ul>
-			<li class="plant-list" *ngFor="let plant of apiPlant; index as i">
-				<p>{{plant.common_name}}</p>
-				<p> Date Planted:<input [(ngModel)]="plantDate[i]" type="date" min="2022-12-07"></p>
-				<p> Pick Bloom:<input [(ngModel)]="pickDate[i]" type="date" min="2022-12-07"></p>
+	<div class="item-container" >
+		<h3>Favorites</h3>
+		<ul >
+			<li  *ngFor="let plant of apiPlant; index as i">
+				<div class="plant-list"*ngIf="hideCards[i] === false">
+				<p>Plant: {{plant.common_name}}</p>
+				<p> Garden Name: <input [(ngModel)]="gardenName[i]" type="text"></p>
+				<p> Description: <input [(ngModel)]="description[i]" type="text"></p>
+				<p> Date Planted: <input [(ngModel)]="plantDate[i]" type="date" min="2022-12-07"></p>
+				<p> Pick Bloom: <input [(ngModel)]="pickDate[i]" type="date" min="2022-12-07"></p>
 				<p> Watering Frequency in days:<input [(ngModel)]="waterFreq[i]" type="number" min="1" max="14"></p>
 				<p> Season:
 					<select [(ngModel)]="season[i]" id="seasons" name="seasons">
@@ -21,11 +25,23 @@
 						<option>Spring</option>
 					</select>
 				</p>
+				<p> Additional Notes: <input [(ngModel)]="notes[i]" type="text"></p>
 				<button (click)="UpdateGarden(i)">Update plant</button>
 				<button (click)="RemoveFromGarden(i)">Remove plant</button>
+			</div>
+			</li>
+		</ul>
+
+		<div>
+		<h3>My Gardens</h3>
+		<ul>
+			<li class="plant-list" *ngFor="let garden of listGardens; index as i">
+				<p>Garden Number: {{garden.gardenName}}</p>
 			</li>
 		</ul>
 	</div>
+	</div>
+	
 	<div *ngIf="!loggedIn">
 		<p class="user-name">Log in to see user info</p>
 	</div>

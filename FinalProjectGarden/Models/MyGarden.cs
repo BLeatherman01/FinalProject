@@ -7,7 +7,7 @@ public partial class MyGarden
 {
     public int? Id { get; set; }
 
-    public string? GardenName { get; set; }
+    public string GardenName { get; set; }
 
     public string? Description { get; set; }
 
