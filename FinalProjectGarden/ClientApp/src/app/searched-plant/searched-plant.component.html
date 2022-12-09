@@ -5,7 +5,7 @@
         <button (click)="getPlantDetails();"> Search for {{searchPlants}}</button>
     </div>
 
-    <div >
+    <div>
         <ul class="list-items" *ngIf="imageList.length === list.length">
             <li class="searchedplantz" *ngFor="let p of list; index as i">
                 <p>Name: {{p.common_name}} </p>
@@ -16,3 +16,4 @@
         </ul>
     </div>
 </div>
+

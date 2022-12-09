@@ -58,18 +58,19 @@ export class SearchedPlantComponent implements OnInit {
        this.results.data.forEach((plant: Plant) => {
            let name =plant.common_name;
            console.log("check",name)  
-          this.getImageDetails(name);
+          this.getImageDetails();
           console.log(plant)
       })
       
       });
   }
-  getImageDetails(name: string): void {
-    this.ImageApi.getImages(name).subscribe(
+  getImageDetails(): void {
+    this.ImageApi.getImages(this.searchPlants).subscribe(
       (result: SearchImage) => {
 
         if(result.hits[0]){
-        this.imageList.push(result.hits[0].previewURL);
+        console.log("check results", result.hits[0].previewURL)
+          this.imageList.push(result.hits[0].previewURL);
         console.log("hits", result.hits[0]);
         }
         else{

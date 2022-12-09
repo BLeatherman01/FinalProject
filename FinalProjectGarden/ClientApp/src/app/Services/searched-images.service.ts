@@ -13,6 +13,7 @@ export class SearchedImagesService {
   constructor(private http: HttpClient) {}
 
   getImages(name: string): Observable<SearchImage> {
+    console.log("Checking name", name)
     return this.http.get<SearchImage>(
       this.baseUrl + '?key=' + Secret.key2 + '&q=' + name + '&image_type=photo'
     );
