@@ -1,5 +1,9 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
+import { MyGarden } from '../Services/my-garden';
+import { MyGardenService } from '../Services/my-garden.service';
+import { Plant, SearchPlant } from '../Services/searched-plant';
+import { SearchedPlantService } from '../Services/searched-plant.service';
 
 @Component({
   selector: 'app-my-garden',
