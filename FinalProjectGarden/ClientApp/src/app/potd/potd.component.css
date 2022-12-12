@@ -5,6 +5,11 @@ h1 {
     justify-content: center;
   }
   
+  img{
+    height: 500px;
+    width: 650px;
+  }
+  
   .item-container {
     /* flex-wrap: wrap; */
     display: flex;
