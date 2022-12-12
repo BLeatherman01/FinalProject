@@ -5,7 +5,7 @@ import { MyGardenService } from '../Services/my-garden.service';
 import { Plant, SearchPlant } from '../Services/searched-plant';
 import { SearchedPlantService } from '../Services/searched-plant.service';
 
-styleUrls: ['./my-garden.component.css'],
+styleUrls: ['./my-garden.component.css'];
 
 @Component({
   selector: 'app-my-garden',
@@ -16,7 +16,6 @@ export class MyGardenComponent implements OnInit {
 
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
-<<<<<<< Updated upstream
   
   showCard: boolean = false;
   
@@ -35,14 +34,8 @@ export class MyGardenComponent implements OnInit {
     private gardenService: MyGardenService,
     private searchedPlantService: SearchedPlantService
   ) {}
-=======
->>>>>>> Stashed changes
-
-
-  constructor(private authService: SocialAuthService) { }
   
   ngOnInit(): void {
-<<<<<<< Updated upstream
     this.getUserGarden();
   }
 
@@ -94,12 +87,6 @@ export class MyGardenComponent implements OnInit {
               });
           });
         });
-=======
-
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = (user != null);
->>>>>>> Stashed changes
     });
   }
 
