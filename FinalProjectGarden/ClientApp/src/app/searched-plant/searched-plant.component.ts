@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Query } from '@angular/core';
 import { MyGarden } from '../Services/my-garden';
 import { MyGardenService } from '../Services/my-garden.service';
 import { SearchImage } from '../Services/searched-images';
@@ -8,6 +8,8 @@ import { SearchedPlantService } from '../Services/searched-plant.service';
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { SearchImages } from '../Services/search-bing';
 import { BingSearchService } from '../Services/bing-search.service';
+import { WikiService } from '../wiki.service';
+import { Search, WikiSearch } from '../search-wiki';
 
 @Component({
   selector: 'app-searched-plant',
@@ -25,16 +27,21 @@ export class SearchedPlantComponent implements OnInit {
   searchPlants: string = '';
 
   name: string = '';
-  list: Plant[] = [];
+  plantList: Plant[] = [];
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
+
+  //Wiki API
+  wikiResult: WikiSearch = {} as WikiSearch
+  wikiQueryList: Search [] = [];
 
   constructor(
     private plantApi: SearchedPlantService,
     private ImageApi: SearchedImagesService,
     private gardenService: MyGardenService,
     private authService: SocialAuthService,
-    private bingSearch: BingSearchService
+    private bingSearch: BingSearchService,
+    private WikiApi: WikiService
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +71,7 @@ export class SearchedPlantComponent implements OnInit {
       .getPlants(this.searchPlants)
       .subscribe((result: SearchPlant) => {
         this.results = result;
-        this.list = this.results.data;
+        this.plantList = this.results.data;
         let iteration: number = 1;
         this.results.data.forEach((plant: Plant) => {
           let name = plant.common_name;
@@ -77,21 +84,19 @@ export class SearchedPlantComponent implements OnInit {
       .getBingSearch(name, iteration)
       .subscribe((result: SearchImages) => {
         this.bingImageResults = result;
-        for (let i: number = 0; i < this.list.length; i++) {
+        for (let i: number = 0; i < this.plantList.length; i++) {
      
             // console.log("Please help",  this.bingImageResults.value[1].contentUrl.startsWith('http'))
             // console.log("what is this", this.bingImageList[i] = this.bingImageResults.value[1].contentUrl)
-          if (this.list[i].common_name === this.bingImageResults.queryContext.originalQuery) {
+          if (this.plantList[i].common_name === this.bingImageResults.queryContext.originalQuery) {
            
             // if (!this.bingImageResults.value[1].contentUrl.startsWith("https")) 
             // {  
             //   
             // } 
             // else 
-            
               this.bingImageList[i] = this.bingImageResults.value[1].contentUrl
               // break;;
-            
           }
           // else{
           //   this.bingImageList[i] = '/assets/Garden.jpg';
@@ -99,6 +104,19 @@ export class SearchedPlantComponent implements OnInit {
         }
       });
   }
+   getWikiDetail(name:string):void{
+
+    this.WikiApi.getWiki(name).subscribe((result: WikiSearch)=>{
+      console.log("wiki name",name);
+     this.wikiResult = result;
+     this.wikiQueryList = this.wikiResult.query.search;
+     this.wikiQueryList[0].snippet;
+     console.log("query list", this.wikiQueryList)
+     console.log("list 2", this.wikiQueryList[0].snippet)
+
+    });
+   }
+
 
   //***additional image API if needed  */
   // getImageDetails(): void {
