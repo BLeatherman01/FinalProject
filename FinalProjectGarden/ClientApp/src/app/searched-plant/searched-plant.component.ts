@@ -35,6 +35,8 @@ export class SearchedPlantComponent implements OnInit {
   wikiResult: WikiSearch = {} as WikiSearch
   wikiQueryList: Search [] = [];
 
+  wikiSnippet: string = "";
+  // wikiElement: HTMLElement = document.getElementById(".wikiSnippet");
   constructor(
     private plantApi: SearchedPlantService,
     private ImageApi: SearchedImagesService,
@@ -75,7 +77,8 @@ export class SearchedPlantComponent implements OnInit {
         let iteration: number = 1;
         this.results.data.forEach((plant: Plant) => {
           let name = plant.common_name;
-          this.getBingImage(iteration, name);
+           this.getBingImage(iteration, name);
+           
         });
       });
   }
@@ -85,11 +88,9 @@ export class SearchedPlantComponent implements OnInit {
       .subscribe((result: SearchImages) => {
         this.bingImageResults = result;
         for (let i: number = 0; i < this.plantList.length; i++) {
-     
             // console.log("Please help",  this.bingImageResults.value[1].contentUrl.startsWith('http'))
             // console.log("what is this", this.bingImageList[i] = this.bingImageResults.value[1].contentUrl)
           if (this.plantList[i].common_name === this.bingImageResults.queryContext.originalQuery) {
-           
             // if (!this.bingImageResults.value[1].contentUrl.startsWith("https")) 
             // {  
             //   
@@ -104,16 +105,22 @@ export class SearchedPlantComponent implements OnInit {
         }
       });
   }
+  
+  
    getWikiDetail(name:string):void{
 
     this.WikiApi.getWiki(name).subscribe((result: WikiSearch)=>{
       console.log("wiki name",name);
      this.wikiResult = result;
      this.wikiQueryList = this.wikiResult.query.search;
-     this.wikiQueryList[0].snippet;
-     console.log("query list", this.wikiQueryList)
+     this.wikiSnippet = this.wikiQueryList[0].snippet;
+     
+  
      console.log("list 2", this.wikiQueryList[0].snippet)
-
+    //  let wikiElement  = document.getElementById(".wikiSnippet")
+    //  if(wikiElement != null){
+    //  wikiElement.innerHTML = this.wikiSnippet;
+    // }
     });
    }
 

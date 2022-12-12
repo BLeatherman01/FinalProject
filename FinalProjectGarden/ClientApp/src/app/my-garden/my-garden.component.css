@@ -6,12 +6,10 @@
     
 }
 .item-container {
-  /* flex-wrap: wrap; */
   display: flex;
-  /* align-content: flex-start; */
   flex-direction: column;
-  justify-content: space-around;
   width: 80%;
+  height: 77%;
   background-color: rgba(0, 0, 0, 0.6);
   padding: 40px;
   border-radius: 8px;
@@ -26,17 +24,15 @@ h3 {
   justify-content: center;
 }
 .plant-list{
-    color:white;
-   
-    list-style: none;
-    border: 3px solid #fff;
-    border-radius: 6px;
-    width: 400px;
-    padding: 22px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 10px;
+  list-style: none;
+  border: 3px solid rgb(0, 0, 0);
+  border-radius: 6px;
+  color: white;
+  background-color: rgba(0, 116, 25);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  width: 350px;
     
 }
 .garden-wrapper{
