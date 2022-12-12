@@ -3,14 +3,16 @@
     <div class="input-container">
         <input type="text" [(ngModel)]="searchPlants" />
         <button (click)="getPlantDetails();"> Search for {{searchPlants}}</button>
+
     </div>
-    <ul class="list-items" *ngIf="bingImageList.length === list.length">
-        <li class="searchedplantz" *ngFor="let p of list; index as i">
+    <ul class="list-items" *ngIf="bingImageList.length === plantList.length">
+        <li class="searchedplantz" *ngFor="let p of plantList; index as i">
             <p>Name: {{p.common_name}} </p>
             <p>Family: {{p.family}}</p>
             <img src="{{bingImageList[i]}}">
-            <button class="ask-button" type="button" (click)="AddToGarden(p,bingImageList[i])">Add to Favorites!</button>
+            <button class="ask-button" type="button" (click)="AddToGarden(p,bingImageList[i])">Add to
+                Favorites!</button>
+            <button (click)="getWikiDetail(searchPlants);">Learn more</button>
         </li>
     </ul>
-
 </div>
