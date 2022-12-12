@@ -5,6 +5,8 @@ import { MyGardenService } from '../Services/my-garden.service';
 import { Plant, SearchPlant } from '../Services/searched-plant';
 import { SearchedPlantService } from '../Services/searched-plant.service';
 
+styleUrls: ['./my-garden.component.css'];
+
 @Component({
   selector: 'app-my-garden',
   templateUrl: './my-garden.component.html',
@@ -13,7 +15,6 @@ import { SearchedPlantService } from '../Services/searched-plant.service';
 export class MyGardenComponent implements OnInit {
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
-
   showCard: boolean = false;
 
   listGardens: MyGarden[] = [];
