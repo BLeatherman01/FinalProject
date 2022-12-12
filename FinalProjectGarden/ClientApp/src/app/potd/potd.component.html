@@ -2,10 +2,11 @@
 <div class="item-container">
     <ul class="list-items">
         <li class="searchedplantz" *ngFor="let p of list">
-            <img src="{{plantImage.previewURL}}">
+            <img src="{{bingImageList[0]}}">
             <p>Name: {{p.common_name}} </p>
             <p>Family: {{p.family}}</p>
-            <button class="buttontester" type="button" >Add to Garden!</button>
+            <button class="buttontester" type="button" (click)="AddToGarden(p,bingImageList[0])">Add to
+                Favorites!</button>
         </li>
     </ul>
 </div>
