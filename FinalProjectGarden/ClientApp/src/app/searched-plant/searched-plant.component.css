@@ -65,12 +65,54 @@ h1 {
   margin: 0 auto;
 }
 
-.ask-button {
-  margin-top: 15px;
+.button-tester {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 15px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
 }
 
-.ask-button:hover {
-  background-color: #000;
+.button-tester:hover {
+  background-color: #3e8e41;
+}
+
+.button-tester:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.buttontester {
+  display: inline-block;
+  padding: 12px 15px;
+  font-size: 15px;
+  margin-top: 15px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
   color: #fff;
-  transition: background-color 0.3s ease;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.buttontester:hover {
+  background-color: #3e8e41;
+}
+
+.buttontester:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
 }

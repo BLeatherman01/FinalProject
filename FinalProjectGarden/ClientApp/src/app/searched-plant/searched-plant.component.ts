@@ -32,10 +32,10 @@ export class SearchedPlantComponent implements OnInit {
   loggedIn: boolean = false;
 
   //Wiki API
-  wikiResult: WikiSearch = {} as WikiSearch
-  wikiQueryList: Search [] = [];
+  wikiResult: WikiSearch = {} as WikiSearch;
+  wikiQueryList: Search[] = [];
 
-  wikiSnippet: string = "";
+  wikiSnippet: string = '';
   // wikiElement: HTMLElement = document.getElementById(".wikiSnippet");
   constructor(
     private plantApi: SearchedPlantService,
@@ -56,7 +56,7 @@ export class SearchedPlantComponent implements OnInit {
   AddToGarden(plant: Plant, imageurl: string): void {
     let newPlant: MyGarden = {
       id: 0,
-      gardenName: "",
+      gardenName: '',
       gardenId: 0,
       plantId: plant.id,
       plantImageUrl: imageurl,
@@ -77,8 +77,7 @@ export class SearchedPlantComponent implements OnInit {
         let iteration: number = 1;
         this.results.data.forEach((plant: Plant) => {
           let name = plant.common_name;
-           this.getBingImage(iteration, name);
-           
+          this.getBingImage(iteration, name);
         });
       });
   }
@@ -88,16 +87,19 @@ export class SearchedPlantComponent implements OnInit {
       .subscribe((result: SearchImages) => {
         this.bingImageResults = result;
         for (let i: number = 0; i < this.plantList.length; i++) {
-            // console.log("Please help",  this.bingImageResults.value[1].contentUrl.startsWith('http'))
-            // console.log("what is this", this.bingImageList[i] = this.bingImageResults.value[1].contentUrl)
-          if (this.plantList[i].common_name === this.bingImageResults.queryContext.originalQuery) {
-            // if (!this.bingImageResults.value[1].contentUrl.startsWith("https")) 
-            // {  
-            //   
-            // } 
-            // else 
-              this.bingImageList[i] = this.bingImageResults.value[1].contentUrl
-              // break;;
+          // console.log("Please help",  this.bingImageResults.value[1].contentUrl.startsWith('http'))
+          // console.log("what is this", this.bingImageList[i] = this.bingImageResults.value[1].contentUrl)
+          if (
+            this.plantList[i].common_name ===
+            this.bingImageResults.queryContext.originalQuery
+          ) {
+            // if (!this.bingImageResults.value[1].contentUrl.startsWith("https"))
+            // {
+            //
+            // }
+            // else
+            this.bingImageList[i] = this.bingImageResults.value[1].contentUrl;
+            // break;;
           }
           // else{
           //   this.bingImageList[i] = '/assets/Garden.jpg';
@@ -105,25 +107,21 @@ export class SearchedPlantComponent implements OnInit {
         }
       });
   }
-  
-  
-   getWikiDetail(name:string):void{
 
-    this.WikiApi.getWiki(name).subscribe((result: WikiSearch)=>{
-      console.log("wiki name",name);
-     this.wikiResult = result;
-     this.wikiQueryList = this.wikiResult.query.search;
-     this.wikiSnippet = this.wikiQueryList[0].snippet;
-     
-  
-     console.log("list 2", this.wikiQueryList[0].snippet)
-    //  let wikiElement  = document.getElementById(".wikiSnippet")
-    //  if(wikiElement != null){
-    //  wikiElement.innerHTML = this.wikiSnippet;
-    // }
+  getWikiDetail(name: string): void {
+    this.WikiApi.getWiki(name).subscribe((result: WikiSearch) => {
+      console.log('wiki name', name);
+      this.wikiResult = result;
+      this.wikiQueryList = this.wikiResult.query.search;
+      this.wikiSnippet = this.wikiQueryList[0].snippet;
+
+      console.log('list 2', this.wikiQueryList[0].snippet);
+      //  let wikiElement  = document.getElementById(".wikiSnippet")
+      //  if(wikiElement != null){
+      //  wikiElement.innerHTML = this.wikiSnippet;
+      // }
     });
-   }
-
+  }
 
   //***additional image API if needed  */
   // getImageDetails(): void {
