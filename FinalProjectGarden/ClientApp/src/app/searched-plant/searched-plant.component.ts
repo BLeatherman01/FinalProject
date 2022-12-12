@@ -95,10 +95,8 @@ export class SearchedPlantComponent implements OnInit {
             //   
             // } 
             // else 
-            
               this.bingImageList[i] = this.bingImageResults.value[1].contentUrl
               // break;;
-            
           }
           // else{
           //   this.bingImageList[i] = '/assets/Garden.jpg';
@@ -106,13 +104,15 @@ export class SearchedPlantComponent implements OnInit {
         }
       });
   }
-   getWikiDetail(searchPlants:string):void{
+   getWikiDetail(name:string):void{
 
-    this.WikiApi.getWiki(searchPlants).subscribe((result: WikiSearch)=>{
-      console.log("wiki name",searchPlants);
+    this.WikiApi.getWiki(name).subscribe((result: WikiSearch)=>{
+      console.log("wiki name",name);
      this.wikiResult = result;
      this.wikiQueryList = this.wikiResult.query.search;
      this.wikiQueryList[0].snippet;
+     console.log("query list", this.wikiQueryList)
+     console.log("list 2", this.wikiQueryList[0].snippet)
 
     });
    }
