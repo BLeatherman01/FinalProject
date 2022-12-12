@@ -78,6 +78,7 @@ export class SearchedPlantComponent implements OnInit {
         this.results.data.forEach((plant: Plant) => {
           let name = plant.common_name;
           this.getBingImage(iteration, name);
+         
         });
       });
   }
