@@ -112,7 +112,7 @@ export class SearchedPlantComponent implements OnInit {
       console.log("wiki name",searchPlants);
      this.wikiResult = result;
      this.wikiQueryList = this.wikiResult.query.search;
-     this.wikiQueryList[0];
+     this.wikiQueryList[0].snippet;
 
     });
    }
