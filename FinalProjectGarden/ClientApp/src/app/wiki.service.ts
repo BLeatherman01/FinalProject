@@ -13,7 +13,7 @@ baseUrl: string = 'https://en.wikipedia.org/w/api.php?action=query&list=search&s
   constructor(private http: HttpClient) {}
 
   getWiki(name: string): Observable<WikiSearch>{
-    return this.http.get<WikiSearch>(
+    return this.http.get<any>(
       this.baseUrl + name + '&format=json'
     )
   }
