@@ -14,8 +14,8 @@
 					<p> Plant: {{plant.common_name}}</p>
 					<p> Garden Name: <input [(ngModel)]="gardenName[i]" type="text"></p>
 					<p> Description: <input [(ngModel)]="description[i]" type="text"></p>
-					<p> Date Planted: <input [(ngModel)]="plantDate[i]" type="date" min="2022-12-07"></p>
-					<p> Pick Bloom: <input [(ngModel)]="pickDate[i]" type="date" min="2022-12-07"></p>
+					<p> Date Planted: <input [(ngModel)]="plantDate[i]" type="datetime-local" ></p>
+					<p> Pick Bloom: <input [(ngModel)]="pickDate[i]" type="datetime-local" ></p>
 					<p> Watering Frequency in days:<input [(ngModel)]="waterFreq[i]" type="number" min="1" max="14"></p>
 					<p> Season:
 						<select [(ngModel)]="season[i]" id="seasons" name="seasons">
