@@ -12,8 +12,9 @@
             <img src="{{bingImageList[i]}}">
             <button class="buttontester" type="button" (click)="AddToGarden(p,bingImageList[i])">Add to
                 Favorites!</button>
-            <button class="buttontester" (click)="getWikiDetail(searchPlants);">Learn more</button>
+            <button class="buttontester" (click)="getWikiDetail(p.common_name);">Learn more</button>
         </li>
     </ul>
-    <p class="wiki-item">{{wikiSnippet}}</p>
+    <p class="wiki-item">{{wikiSnippet}}
+    </p>
 </div>
