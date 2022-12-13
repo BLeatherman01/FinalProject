@@ -100,5 +100,15 @@ namespace FinalProjectGarden.Controllers
         {
             return _context.MyGardens.Any(e => e.Id == id);
         }
+
+        [HttpGet("GardenDetails/{GardenName}")]
+        public async Task<ActionResult<MyGarden>> GetGardenDetails(string GardenName)
+        {
+            return _context.MyGardens.Where(garden => garden.GardenName == GardenName).First();
+        }
+
+
+
+
     }
 }
