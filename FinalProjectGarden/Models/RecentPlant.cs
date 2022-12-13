@@ -5,13 +5,21 @@ namespace FinalProjectGarden.Models;
 
 public partial class RecentPlant
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
-    public string? UserName { get; set; }
+    public DateTime? PlantDate { get; set; }
 
-    public string? RecentPlants { get; set; }
+    public DateTime? PickBloom { get; set; }
 
-    public int? RecentIds { get; set; }
+    public int? WateringFreq { get; set; }
 
-    public virtual User? RecentIdsNavigation { get; set; }
+    public string? Season { get; set; }
+
+    public string? PlantId { get; set; }
+
+    public string? PlantImageUrl { get; set; }
+
+    public int? GardenId { get; set; }
+    [System.Text.Json.Serialization.JsonIgnore]
+    public virtual MyGarden? Garden { get; set; }
 }

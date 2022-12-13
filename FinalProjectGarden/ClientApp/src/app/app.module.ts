@@ -17,6 +17,7 @@ import {
   SocialLoginModule,
 } from '@abacritt/angularx-social-login';
 import { Secret } from './Services/secret';
+import { WaterFrequencyComponent } from './water-frequency/water-frequency.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { Secret } from './Services/secret';
     LoginComponent,
     MyGardenComponent,
     POTDComponent,
+    WaterFrequencyComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -39,6 +41,7 @@ import { Secret } from './Services/secret';
       { path: 'Login', component: LoginComponent },
       { path: 'MyGarden', component: MyGardenComponent },
       { path: 'POTD', component: POTDComponent },
+      { path: "WaterFrequency", component: WaterFrequencyComponent},
     ]),
   ],
   providers: [

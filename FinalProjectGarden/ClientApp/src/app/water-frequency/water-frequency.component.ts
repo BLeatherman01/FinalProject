@@ -4,6 +4,10 @@ import { MyGarden } from '../Services/my-garden';
 import { MyGardenService } from '../Services/my-garden.service';
 import { Plant } from '../Services/searched-plant';
 import { SearchedPlantService } from '../Services/searched-plant.service';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-water-frequency',
@@ -13,7 +17,6 @@ import { SearchedPlantService } from '../Services/searched-plant.service';
 export class WaterFrequencyComponent implements OnInit {
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
-
   showCard: boolean = false;
 
   listGardens: MyGarden[] = [];
