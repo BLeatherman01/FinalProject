@@ -17,7 +17,6 @@ import {
   SocialLoginModule,
 } from '@abacritt/angularx-social-login';
 import { Secret } from './Services/secret';
-import { GardenDetailsComponent } from './garden-details/garden-details.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { GardenDetailsComponent } from './garden-details/garden-details.componen
     LoginComponent,
     MyGardenComponent,
     POTDComponent,
-    GardenDetailsComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -41,7 +39,6 @@ import { GardenDetailsComponent } from './garden-details/garden-details.componen
       { path: 'Login', component: LoginComponent },
       { path: 'MyGarden', component: MyGardenComponent },
       { path: 'POTD', component: POTDComponent },
-      { path: 'GardenDetails', component: GardenDetailsComponent },
     ]),
   ],
   providers: [
