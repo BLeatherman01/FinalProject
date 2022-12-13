@@ -51,5 +51,13 @@ namespace FinalProjectGarden.Controllers
         public void Delete(int id)
         {
         }
+
+
+
+        [HttpGet("{id}")]
+        public string GetPlantsByGardenName(string GardenName)
+        {
+            return "value";
+        }
     }
 }

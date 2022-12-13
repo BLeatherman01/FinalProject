@@ -18,6 +18,7 @@ import {
 } from '@abacritt/angularx-social-login';
 import { Secret } from './Services/secret';
 import { WaterFrequencyComponent } from './water-frequency/water-frequency.component';
+import { GardenDetailsComponent } from './garden-details/garden-details.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,9 @@ import { WaterFrequencyComponent } from './water-frequency/water-frequency.compo
     LoginComponent,
     MyGardenComponent,
     POTDComponent,
-    WaterFrequencyComponent
+    WaterFrequencyComponent,
+    GardenDetailsComponent
+
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -42,6 +45,8 @@ import { WaterFrequencyComponent } from './water-frequency/water-frequency.compo
       { path: 'MyGarden', component: MyGardenComponent },
       { path: 'POTD', component: POTDComponent },
       { path: "WaterFrequency", component: WaterFrequencyComponent},
+      { path: 'GardenDetails/:GardenName', component : GardenDetailsComponent}
+
     ]),
   ],
   providers: [
