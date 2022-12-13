@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "secretStore": "AzureAppSettings",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/gcsqlprd1/databases/GreenGrassDB",
+      "type": "mssql.azure",
+      "connectionId": "ConnectionStrings:gcsqlprd1.database.windows.net"
+    }
+  }
+}

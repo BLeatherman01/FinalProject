@@ -5,6 +5,8 @@ import { MyGarden } from '../Services/my-garden';
 import { MyGardenService } from '../Services/my-garden.service';
 import { Plant, SearchPlant } from '../Services/searched-plant';
 import { SearchedPlantService } from '../Services/searched-plant.service';
+import { DatePipe } from '@angular/common';
+
 
 styleUrls: ['./my-garden.component.css'];
 
@@ -34,10 +36,14 @@ export class GardenDetailsComponent implements OnInit {
     private searchedPlantService: SearchedPlantService,
     private gardenDetailsService: GardenDetailsService) {
 
-      
+
      }
 
   ngOnInit(): void {
   }
+
+getWateringDay(): void {
+  
+}
 
 }
