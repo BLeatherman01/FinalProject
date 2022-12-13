@@ -11,7 +11,7 @@
 		<ul class="list-items">
 			<li *ngFor="let plant of apiPlant; index as i">
 				<div class="plant-list" *ngIf="hideCards[i] === false">
-					<p>Plant: {{plant.common_name}}</p>
+					<p> Plant: {{plant.common_name}}</p>
 					<p> Garden Name: <input [(ngModel)]="gardenName[i]" type="text"></p>
 					<p> Description: <input [(ngModel)]="description[i]" type="text"></p>
 					<p> Date Planted: <input [(ngModel)]="plantDate[i]" type="date" min="2022-12-07"></p>
