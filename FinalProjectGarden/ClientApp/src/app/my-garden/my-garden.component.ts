@@ -2,6 +2,7 @@ import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
 import { MyGarden } from '../Services/my-garden';
 import { MyGardenService } from '../Services/my-garden.service';
+import { RecentPlants } from '../Services/recent-plants';
 import { Plant, SearchPlant } from '../Services/searched-plant';
 import { SearchedPlantService } from '../Services/searched-plant.service';
 
@@ -18,6 +19,7 @@ export class MyGardenComponent implements OnInit {
   showCard: boolean = false;
 
   listGardens: MyGarden[] = [];
+  listPlants: RecentPlants [] = [];
   apiPlant: Plant[] = [];
   plantDate: Date[] = [];
   pickDate: Date[] = [];
@@ -42,10 +44,10 @@ export class MyGardenComponent implements OnInit {
     this.hideCards[index] = true;
     this.listGardens[index].gardenName = this.gardenName[index];
     this.listGardens[index].description = this.description[index];
-    this.listGardens[index].plantDate = this.plantDate[index];
-    this.listGardens[index].pickBloom = this.pickDate[index];
-    this.listGardens[index].wateringFreq = this.waterFreq[index];
-    this.listGardens[index].season = this.season[index];
+    this.listPlants[index].plantDate = this.plantDate[index];
+    this.listPlants[index].pickBloom = this.pickDate[index];
+    this.listPlants[index].wateringFreq = this.waterFreq[index];
+    this.listPlants[index].season = this.season[index];
     this.listGardens[index].notes = this.notes[index];
 
     this.gardenService
@@ -64,6 +66,7 @@ export class MyGardenComponent implements OnInit {
       });
   }
 
+  
   getUserGarden() {
     this.authService.authState.subscribe((user) => {
       this.user = user;
