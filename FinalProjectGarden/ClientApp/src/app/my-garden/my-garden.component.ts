@@ -1,6 +1,5 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
-import { GardenDetailsService } from '../Services/garden-details.service';
 import { MyGarden } from '../Services/my-garden';
 import { MyGardenService } from '../Services/my-garden.service';
 import { Plant, SearchPlant } from '../Services/searched-plant';
@@ -32,8 +31,7 @@ export class MyGardenComponent implements OnInit {
   constructor(
     private authService: SocialAuthService,
     private gardenService: MyGardenService,
-    private searchedPlantService: SearchedPlantService,
-    private gardenDetailsService: GardenDetailsService
+    private searchedPlantService: SearchedPlantService
   ) {}
 
   ngOnInit(): void {
@@ -90,7 +88,4 @@ export class MyGardenComponent implements OnInit {
         });
     });
   }
-
-
-  
 }
