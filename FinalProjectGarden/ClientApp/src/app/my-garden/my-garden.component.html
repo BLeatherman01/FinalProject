@@ -42,7 +42,7 @@
 		<h3>My Gardens</h3>
 		<ul class="list-items">
 			<li class="plant-list" *ngFor="let garden of listGardens; index as i">
-				<p *ngIf="">Garden Number: {{garden.gardenName}}</p>
+				<p> Garden Name: {{garden.gardenName}}</p>
 				<button class="buttontester" [routerLink]="['/GardenDetails',garden.gardenName]"> View More
 					Details!</button>
 				<button class="buttontester" (click)="RemoveFromGarden(i)">Remove Garden</button>

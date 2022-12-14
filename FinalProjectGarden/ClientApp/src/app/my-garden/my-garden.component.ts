@@ -37,6 +37,7 @@ export class MyGardenComponent implements OnInit {
   hideCards: boolean[] = [];
   garId: Users = {} as Users;
   gooid = this.users.map((g) => g.googleID);
+  UsersService: any;
 
   constructor(
     private authService: SocialAuthService,
@@ -49,11 +50,10 @@ export class MyGardenComponent implements OnInit {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = user != null;
-   
-    this.getMyFavPlant();
     this.getUserGarden();
-  
+    this.getMyFavPlant();
   });
+  this.UsersService.AddUser(this.user.name, this.user.id);
   }
 
   UpdateGarden(index: number) {

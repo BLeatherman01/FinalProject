@@ -14,6 +14,7 @@ import { RecentPlantsService } from '../Services/recent-plants.service';
   styleUrls: ['./garden-details.component.css']
 })
 export class GardenDetailsComponent implements OnInit {
+  UsersService: any;
 
   constructor(
     private authService: SocialAuthService,
@@ -52,12 +53,16 @@ export class GardenDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     // this.getUserGarden()
-
-    this.sub = this.route.paramMap.subscribe((params) =>{
-      this.searchID = params.get('GardenName');
-      this.getDetailsService.GetMyGardensDetails(this.searchID).subscribe((result : MyGarden) => {this.searchedgarden = result; console.log(result)});
-    });
-
+    this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = user != null;
+      this.sub = this.route.paramMap.subscribe((params) =>{
+        this.searchID = params.get('GardenName');
+        this.getDetailsService
+        .GetMyGardensDetails(this.searchID).subscribe((result : MyGarden) => {
+          this.searchedgarden = result; console.log(result)});
+      });
+  });
   }
 
 
@@ -68,18 +73,19 @@ export class GardenDetailsComponent implements OnInit {
         this.listGardens.splice(index, 1);
       });
   }
-
-
+  
   getUserGarden() {
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = user != null;
-      this.gardenService
-        .GetMyGardens(this.user.id)
-        .subscribe((result: MyGarden[]) => {
-          this.listGardens = result;
-          console.log(this.listGardens)
+    this.gardenService
+      .GetMyGardens(this.user.id)
+      .subscribe((result: MyGarden[]) => {
+        this.listGardens = result;
+    // this.gardenService
+    // .GetMyGardens(this.user.id)
+    // .subscribe((result: MyGarden[]) => {
+    //   this.listGardens = result;
+    //   console.log(this.listGardens)
           // this.listGardens[i].gardenName?.search()
+          
 
           //console.log("1"+ this.listGardens[0].plantId);
           // this.listGardens.forEach((pid: MyGarden) => {
@@ -94,8 +100,6 @@ export class GardenDetailsComponent implements OnInit {
           //       });
           //       //console.log("2"+ result.common_name);
           //     });
-          });
-        });
-  }
-
+      });
+  };
 }
