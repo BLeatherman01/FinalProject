@@ -10,6 +10,8 @@ import { WikiService } from '../wiki.service';
 import { Search, WikiSearch } from '../search-wiki';
 import { MyGarden } from '../Services/my-garden';
 import { MyGardenService } from '../Services/my-garden.service';
+import { RecentPlants } from '../Services/recent-plants';
+import { RecentPlantsService } from '../Services/recent-plants.service';
 
 @Component({
   selector: 'app-potd',
@@ -43,7 +45,8 @@ export class POTDComponent implements OnInit {
     private gardenService: MyGardenService,
     private authService: SocialAuthService,
     private bingSearch: BingSearchService,
-    private WikiApi: WikiService
+    private WikiApi: WikiService,
+    private recentPlants: RecentPlantsService
 
   ) { }
 
@@ -81,74 +84,21 @@ export class POTDComponent implements OnInit {
         console.log(this.bingImageResults)
         console.log(this.list);
         for (let i: number = 0; i <= 1; i++) {
-     
-            // console.log("Please help",  this.bingImageResults.value[1].contentUrl.startsWith('http'))
-            // console.log("what is this", this.bingImageList[i] = this.bingImageResults.value[1].contentUrl)
           if (this.list[i].common_name === this.bingImageResults.queryContext.originalQuery) {
-           
-            // if (!this.bingImageResults.value[1].contentUrl.startsWith("https")) 
-            // {  
-            //   
-            // } 
-            // else 
               this.bingImageList[i] = this.bingImageResults.value[1].contentUrl
-              // break;;
           }
-          // else{
-          //   this.bingImageList[i] = '/assets/Garden.jpg';
-          // }
         }
       });
   }
 
 
-
-
-
-
-
-
-
-
-  // getImageDetails(): void {
-  //   this.ImageApi.getImages(this.searchPlants).subscribe(
-  //     (result: SearchImage) => {
-  //       this.imageResults = result;
-  //       this.imageList = this.imageResults.hits;
-  //       console.log(this.imageResults);
-  //       this.plantImage = this.imageList[2];
-  //     }
-  //   );
-  // }
-
   AddToGarden(plant: Plant, imageurl: string): void {
-    let newPlant: MyGarden = {
-      id: 0,
-      gardenName: "",
-      gardenId: 0,
-      plantId: plant.id,
-      plantImageUrl: imageurl,
-    };
-    this.gardenService
-      .PlantingGarden(newPlant, this.user.id)
-      .subscribe((result: MyGarden) => {
+    this.recentPlants
+      .AddPlantToFavorite(plant.id,imageurl, this.user.id)
+      .subscribe((result: RecentPlants) => {
         console.log(result);
       });
   }
-
-  // getPlantDetails(): void {
-  //   this.plantApi
-  //     .getPlants(this.searchPlants)
-  //     .subscribe((result: SearchPlant) => {
-  //       this.results = result;
-  //       this.plantList = this.results.data;
-  //       let iteration: number = 1;
-  //       this.results.data.forEach((plant: Plant) => {
-  //         let name = plant.common_name;
-  //         this.getBingImage(iteration, name);
-  //       });
-  //     });
-  // }
 
   //  getWikiDetail(name:string):void{
 

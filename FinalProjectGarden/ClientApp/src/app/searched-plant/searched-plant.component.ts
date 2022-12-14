@@ -10,6 +10,8 @@ import { SearchImages } from '../Services/search-bing';
 import { BingSearchService } from '../Services/bing-search.service';
 import { WikiService } from '../wiki.service';
 import { Search, WikiSearch } from '../search-wiki';
+import { RecentPlants } from '../Services/recent-plants';
+import { RecentPlantsService } from '../Services/recent-plants.service';
 
 @Component({
   selector: 'app-searched-plant',
@@ -17,33 +19,30 @@ import { Search, WikiSearch } from '../search-wiki';
   styleUrls: ['./searched-plant.component.css'],
 })
 export class SearchedPlantComponent implements OnInit {
+
   results: SearchPlant = {} as SearchPlant;
-
   bingImageResults: SearchImages = {} as SearchImages;
-
   bingImageList: string[] = [];
   imageList: string[] = [];
-
   searchPlants: string = '';
-
   name: string = '';
   plantList: Plant[] = [];
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
-
   //Wiki API
   wikiResult: WikiSearch = {} as WikiSearch;
   wikiQueryList: Search[] = [];
-
   wikiSnippet: string = '';
   // wikiElement: HTMLElement = document.getElementById(".wikiSnippet");
+  
   constructor(
     private plantApi: SearchedPlantService,
     private ImageApi: SearchedImagesService,
     private gardenService: MyGardenService,
     private authService: SocialAuthService,
     private bingSearch: BingSearchService,
-    private WikiApi: WikiService
+    private WikiApi: WikiService,
+    private recentPlants: RecentPlantsService
   ) {}
 
   ngOnInit(): void {
@@ -54,16 +53,9 @@ export class SearchedPlantComponent implements OnInit {
   }
 
   AddToGarden(plant: Plant, imageurl: string): void {
-    let newPlant: MyGarden = {
-      id: 0,
-      gardenName: '',
-      gardenId: 0,
-      plantId: plant.id,
-      plantImageUrl: imageurl,
-    };
-    this.gardenService
-      .PlantingGarden(newPlant, this.user.id)
-      .subscribe((result: MyGarden) => {
+     this.recentPlants
+      .AddPlantToFavorite(plant.id,imageurl, this.user.id)
+      .subscribe((result: RecentPlants) => {
         console.log(result);
       });
   }
@@ -74,6 +66,7 @@ export class SearchedPlantComponent implements OnInit {
       .subscribe((result: SearchPlant) => {
         this.results = result;
         this.plantList = this.results.data;
+        console.log("DECKS" + this.plantList)
         let iteration: number = 1;
         this.results.data.forEach((plant: Plant) => {
           let name = plant.common_name;
@@ -123,19 +116,4 @@ export class SearchedPlantComponent implements OnInit {
       // }
     });
   }
-
-  //***additional image API if needed  */
-  // getImageDetails(): void {
-  //   this.ImageApi.getImages(this.searchPlants).subscribe(
-  //     (result: SearchImage) => {
-  //       if (result.hits[0]) {
-  //         console.log('check results', result.hits[0].previewURL);
-  //         this.imageList.push(result.hits[0].previewURL);
-  //         console.log('hits', result.hits[0]);
-  //       } else {
-  //         this.imageList.push('/assets/Garden.jpg');
-  //       }
-  //     }
-  //   );
-  // }
 }

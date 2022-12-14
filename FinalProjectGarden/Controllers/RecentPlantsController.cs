@@ -46,7 +46,7 @@ namespace FinalProjectGarden.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRecentPlant(int id, RecentPlant recentPlant)
         {
-            if (id != recentPlant.Id)
+            if (id != recentPlant.GardenId)
             {
                 return BadRequest();
             }
@@ -72,11 +72,18 @@ namespace FinalProjectGarden.Controllers
             return NoContent();
         }
 
-        // POST: api/RecentPlants
+        // POST: api/RecentPlants/gardenId
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<RecentPlant>> PostRecentPlant(RecentPlant recentPlant)
+        public async Task<ActionResult<RecentPlant>> PostRecentPlant(string googleId, string plantId, string img)
         {
+            RecentPlant recentPlant = new RecentPlant();
+            recentPlant.Id = null;
+            recentPlant.PlantId = plantId;
+            recentPlant.PlantImageUrl = img;
+            int userId = (int)_context.Users.First(g => g.GoogleId == googleId).Id;
+            //FINDING FAVORITE GARDEN BY USERID
+            recentPlant.GardenId=(int)_context.MyGardens.First(g => g.GardenId== userId).Id;
             _context.RecentPlants.Add(recentPlant);
             await _context.SaveChangesAsync();
 
@@ -103,5 +110,12 @@ namespace FinalProjectGarden.Controllers
         {
             return _context.RecentPlants.Any(e => e.Id == id);
         }
+
+        [HttpGet("GardenDetails/{GardenID}")]
+        public async Task<ActionResult<IEnumerable<RecentPlant>>> GetGardenDetails(int gardenId)
+        {
+            return _context.RecentPlants.Where(plants => plants.GardenId == gardenId).ToList();
+        }
+
     }
 }

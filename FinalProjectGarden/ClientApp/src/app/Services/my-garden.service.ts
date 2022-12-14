@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MyGarden } from './my-garden';
 import { Observable } from 'rxjs';
+import { RecentPlants } from './recent-plants';
 
 @Injectable({
   providedIn: 'root',
