@@ -31,7 +31,7 @@ export class WaterFrequencyComponent implements OnInit {
   description: string[] = [];
   notes: string[] = [];
   hideCards: boolean[] = [];
-
+  plantedPlants: RecentPlants[] = [];
   constructor(
     private myGardens: MyGardenService,
     private authService: SocialAuthService,
@@ -40,76 +40,69 @@ export class WaterFrequencyComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getUserGarden();
-  }
-  getUserGarden() {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = user != null;
-      this.myGardens
-        .GetMyGardens(this.user.id)
-        .subscribe((result: MyGarden[]) => {
-          this.listGardens = result;
-          //console.log("1"+ this.listGardens[0].plantId);
-          // this.listGardens.forEach((pid: MyGarden) => {
-          //   //console.log(pid.plantId);
-          //   this.searchedPlantService
-          //     .getPlantById(pid.plantId)
-          //     .subscribe((result: Plant) => {
-          //       this.apiPlant.push(result);
-          //       this.apiPlant.forEach((plant: Plant) => {
-          //         this.hideCards.push(false);
-          //       });
-          //       //console.log("2"+ result.common_name);
-          //     });
-          // });
+      this.recentPlants
+        .getAllPlantedPlants(this.user.id)
+        .subscribe((result: RecentPlants[]) => {
+          this.plantedPlants = result;
+          this.getWaterDate();
+
+          console.log(result);
         });
+      this.getUserGarden();
     });
   }
+  getUserGarden() {
+    this.myGardens
+      .GetMyGardens(this.user.id)
+      .subscribe((result: MyGarden[]) => {
+        this.listGardens = result;
+        //console.log("1"+ this.listGardens[0].plantId);
+        // this.listGardens.forEach((pid: MyGarden) => {
+        //   //console.log(pid.plantId);
+        //   this.searchedPlantService
+        //     .getPlantById(pid.plantId)
+        //     .subscribe((result: Plant) => {
+        //       this.apiPlant.push(result);
+        //       this.apiPlant.forEach((plant: Plant) => {
+        //         this.hideCards.push(false);
+        //       });
+        //       //console.log("2"+ result.common_name);
+        //     });
+        // });
+      });
+  }
 
-  //   getWaterDate() {
-  //     this.authService.authState.subscribe((user) => {
-  //       this.user = user;
-  //       this.loggedIn = user != null;
-  //       this.myGardens
-  //         .GetMyGardens(this.user.id)
-  //         .subscribe((result:MyGarden) => {
-  //           this.listGardens = result;
-  // //           //console.log("1"+ this.listGardens[0].plantId);
-  // //           // this.listGardens.forEach((pid: MyGarden) => {
-  // //           //   //console.log(pid.plantId);
-  // //           //   this.searchedPlantService
-  // //           //     .getPlantById(pid.plantId)
-  // //           //     .subscribe((result: Plant) => {
-  // //           //       this.apiPlant.push(result);
+  getWaterDate() {
+    let todaysDate: Date = new Date();
 
-  // //           //     });
+    let waterDate: Date = this.plantedPlants[1].plantDate!;
 
-  //             let todaysDate: Date = new Date();
-  //             let waterDate: Date = new Date();
-  //             if(this.listGardens[0].plantDate != undefined) {
-  //              waterDate.setDate(this.listGardens[0].plantDate.getDate());
+    //need to get difference of plant and todays date
 
-  //              //need to get difference of plant and todays date
+    let datePipe: DatePipe = new DatePipe('en-US');
+    let difference = Math.floor(
+      (Date.UTC(
+        waterDate.getFullYear(),
+        waterDate.getMonth(),
+        waterDate.getDate()
+      ) -
+        Date.UTC(
+          todaysDate.getFullYear(),
+          todaysDate.getMonth(),
+          todaysDate.getDate()
+        )) /
+        (1000 * 60 * 60 * 24)
+    );
 
-  //             console.log("todays date", todaysDate)
-  //             console.log("waterdate", waterDate )
+    console.log(datePipe.transform(todaysDate, 'shortDate'));
+    console.log('differnce between dates', difference);
 
-  //             let datePipe: DatePipe = new DatePipe('en-US');
-  //             let difference = Math.floor((Date.UTC(waterDate.getFullYear(), waterDate.getMonth(), waterDate.getDate()) -Date.UTC(todaysDate.getFullYear(), todaysDate.getMonth(), todaysDate.getDate())) /(1000 * 60 * 60 * 24));
-
-  //             console.log(datePipe.transform(todaysDate, 'shortDate'));
-  //             console.log("differnce between dates", difference)
-
-  //             if(this.listGardens[0].wateringFreq != undefined){
-  //             if(difference % this.listGardens[0].wateringFreq === 0){
-  //               let waterMe = "water Me"
-  //               console.log(waterMe)
-  //             }
-
-  //             }
-  //           }
-  //         });
-  //     });
-  //  }
+    if (difference % this.plantedPlants[0].wateringFreq! === 0) {
+      let waterMe = 'water Me';
+      console.log(waterMe);
+    }
+  }
 }

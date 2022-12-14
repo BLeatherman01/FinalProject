@@ -7,18 +7,22 @@
 		<!--<p>{{ user.id }}</p> Google Auth ID to log in SQL-->
 	</div>
 	<div class="item-container">
+
+		<div class="input-container">
+			<input type="text" [(ngModel)]="newGarden" />
+			<button class="button-tester" (click)="makeGarden()">Create a New Garden</button>
+		</div>
 		<h3>Favorites</h3>
-		<input type="text" [(ngModel)]="newGarden" />
-		<button (click)="makeGarden()">Make New Garden</button>
 		<ul class="list-items">
 			<li class="plant-detail" *ngFor="let plant of listPlants; index as i">
 				<div class="plant-list">
-					<!-- <p> Plant: {{plant.common_name}}</p> -->
-					<p> Garden Name: <input [(ngModel)]="gardenName[i]" type="text"></p>
+					<p> Plant Name: {{plant.plantId}}</p> 
+					<p> Select Garden: <input [(ngModel)]="gardenName[i]" type="text"></p>
 					<p> Description: <input [(ngModel)]="description[i]" type="text"></p>
 					<p> Date Planted: <input [(ngModel)]="plantDate[i]" type="date" min="2022-12-07"></p>
 					<p> Pick Bloom: <input [(ngModel)]="pickDate[i]" type="date" min="2022-12-07"></p>
-					<p> Watering Frequency in days:<input [(ngModel)]="waterFreq[i]" type="number" min="1" max="14"></p>
+					<p> Watering Frequency in days: <input [(ngModel)]="waterFreq[i]" type="number" min="1" max="14">
+					</p>
 					<p> Season:
 						<select [(ngModel)]="season[i]" id="seasons" name="seasons">
 							<option>Summer</option>
@@ -28,7 +32,7 @@
 						</select>
 					</p>
 					<p> Additional Notes: <input [(ngModel)]="notes[i]" type="text"></p>
-					<button class="buttontester" (click)="UpdateGarden(i)">Update plant</button>
+					<button class="buttontester" (click)="UpdateGarden(i)">Add plant</button>
 					<button class="buttontester" (click)="RemoveFromGarden(i)">Remove plant</button>
 				</div>
 			</li>
@@ -39,7 +43,8 @@
 		<ul class="list-items">
 			<li class="plant-list" *ngFor="let garden of listGardens; index as i">
 				<p *ngIf="">Garden Number: {{garden.gardenName}}</p>
-				<button class ="buttontester" [routerLink]="['/GardenDetails',garden.gardenName]"> View More Details!</button>
+				<button class="buttontester" [routerLink]="['/GardenDetails',garden.gardenName]"> View More
+					Details!</button>
 				<button class="buttontester" (click)="RemoveFromGarden(i)">Remove Garden</button>
 			</li>
 		</ul>

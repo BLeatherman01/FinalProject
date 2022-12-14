@@ -28,7 +28,7 @@ namespace FinalProjectGarden.Controllers
             return await _context.RecentPlants.Where(rp => rp.GardenId == favGardenId).ToArrayAsync();
         }
 
-      
+
 
         // PUT: api/RecentPlants/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -62,16 +62,36 @@ namespace FinalProjectGarden.Controllers
             return NoContent();
         }
 
-        
+        [HttpGet("PlantsInGarden")]
+        public async Task<ActionResult<IEnumerable<RecentPlant>>> GetAllPlanted(string googleId)
+        {
+            int userId = (int)_context.Users.First(g => g.GoogleId == googleId).Id;
+            List<int> gardenId = new List<int>(); 
+            List<MyGarden> gardenList = _context.MyGardens.Where(g => g.GardenId == userId).ToList(); 
+            for(int i = 1; i < gardenList.Count; i++)
+            {
+                gardenId.Add((int)gardenList[i].Id);
+
+            }
+            
+          List<RecentPlant>plantList = new List<RecentPlant>();
+            foreach(int id in gardenId) 
+            { 
+                    plantList.AddRange(_context.RecentPlants.Where(p => p.GardenId == id));            
+            }
+
+            return plantList;
+
+        }
 
         // POST: api/RecentPlants/gardenId
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<RecentPlant>> PostRecentPlant(string googleId, string plantId, string img)
+        public async Task<ActionResult<RecentPlant>> PostRecentPlant(string googleId, string commonName, string img)
         {
             RecentPlant recentPlant = new RecentPlant();
             recentPlant.Id = null;
-            recentPlant.PlantId = plantId;
+            recentPlant.PlantId = commonName;
             recentPlant.PlantImageUrl = img;
             int userId = (int)_context.Users.First(g => g.GoogleId == googleId).Id;
             //FINDING FAVORITE GARDEN BY USERID
