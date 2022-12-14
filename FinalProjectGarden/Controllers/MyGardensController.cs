@@ -30,10 +30,10 @@ namespace FinalProjectGarden.Controllers
 
         // GET: api/MyGardens/5
         //Gets Gardens by specific GardenID
-        [HttpGet("{gid}")]
-        public async Task<ActionResult<IEnumerable<MyGarden>>> GetMyGarden(string gardenId)
+        [HttpGet("{googleId}")]
+        public async Task<ActionResult<IEnumerable<MyGarden>>> GetMyGarden(string googleId)
         {
-            int id = (int)_context.Users.First(u => u.GoogleId == gardenId).Id;
+            int id = (int)_context.Users.First(u => u.GoogleId == googleId).Id;
             return await _context.MyGardens.Where(garden => garden.GardenId == id).ToArrayAsync();
                         
         }
@@ -72,10 +72,13 @@ namespace FinalProjectGarden.Controllers
         // POST: api/MyGardens
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<MyGarden>> PostMyGarden(string googleId, MyGarden myGarden)
+        public async Task<ActionResult<MyGarden>> PostMyGarden(string googleId, string gardenName)
         {
+            MyGarden myGarden = new MyGarden();
             myGarden.Id = null;
+            myGarden.GardenName = gardenName;
             myGarden.GardenId = (int)_context.Users.First(u => u.GoogleId == googleId).Id;
+            myGarden.GardenId = (int)_context.MyGardens.First(g => g.GardenName == gardenName).Id;
             _context.MyGardens.Add(myGarden);
             await _context.SaveChangesAsync();
 

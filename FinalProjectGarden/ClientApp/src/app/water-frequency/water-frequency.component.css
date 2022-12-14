@@ -1,0 +1,11 @@
+.plant-list {
+    list-style: none;
+    border: 3px solid rgb(0, 0, 0);
+    border-radius: 6px;
+    color: white;
+    background-color: rgba(0, 116, 25);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    width: 375px;
+  }

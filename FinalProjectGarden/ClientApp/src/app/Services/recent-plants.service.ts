@@ -21,4 +21,8 @@ export class RecentPlantsService {
     );
   }
 
+  getMyFavPlants(googleid: string): Observable<RecentPlants[]> {
+    return this.http.get<RecentPlants[]>(this.baseUrl + `api/RecentPlants?googleId=${googleid}`);
+  }
+
 }
