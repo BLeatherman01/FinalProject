@@ -19,6 +19,12 @@ export class MyGardenService {
       garden
     );
   }
+  makeNewGarden(gardenName:string, googleId:string): Observable<MyGarden>{
+    return this.http.post<MyGarden>(
+      this.baseUrl + `api/MyGardens?googleId=${googleId}&gardenName=${gardenName}`,
+    {}
+    );
+  }
 
   GetMyGardens(googleid: string): Observable<MyGarden[]> {
     return this.http.get<MyGarden[]>(this.baseUrl + `api/MyGardens/${googleid}`);

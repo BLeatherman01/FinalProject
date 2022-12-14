@@ -8,10 +8,12 @@
 	</div>
 	<div class="item-container">
 		<h3>Favorites</h3>
+		<input type="text" [(ngModel)]="newGarden" />
+		<button (click)="makeGarden()">Make New Garden</button>
 		<ul class="list-items">
-			<li *ngFor="let plant of apiPlant; index as i">
-				<div class="plant-list" *ngIf="hideCards[i] === false">
-					<p>Plant: {{plant.common_name}}</p>
+			<li class="plant-detail" *ngFor="let plant of listPlants; index as i">
+				<div class="plant-list">
+					<!-- <p> Plant: {{plant.common_name}}</p> -->
 					<p> Garden Name: <input [(ngModel)]="gardenName[i]" type="text"></p>
 					<p> Description: <input [(ngModel)]="description[i]" type="text"></p>
 					<p> Date Planted: <input [(ngModel)]="plantDate[i]" type="date" min="2022-12-07"></p>
@@ -32,7 +34,7 @@
 			</li>
 		</ul>
 	</div>
-	<div class="item-container">
+	<div class="garden-container">
 		<h3>My Gardens</h3>
 		<ul class="list-items">
 			<li class="plant-list" *ngFor="let garden of listGardens; index as i">
@@ -43,6 +45,7 @@
 		</ul>
 	</div>
 	<div *ngIf="!loggedIn">
+		<!-- <img src="{{ user.photoUrl }}"> -->
 		<p class="user-name">Log in to see user info</p>
 	</div>
 </div>

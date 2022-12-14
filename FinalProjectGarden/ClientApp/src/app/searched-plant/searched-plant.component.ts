@@ -32,16 +32,17 @@ export class SearchedPlantComponent implements OnInit {
   //Wiki API
   wikiResult: WikiSearch = {} as WikiSearch;
   wikiQueryList: Search[] = [];
+  wikiSearchResonse: string = '';
   wikiSnippet: string = '';
   // wikiElement: HTMLElement = document.getElementById(".wikiSnippet");
-  
+
   constructor(
     private plantApi: SearchedPlantService,
     private ImageApi: SearchedImagesService,
     private gardenService: MyGardenService,
     private authService: SocialAuthService,
     private bingSearch: BingSearchService,
-    private WikiApi: WikiService,
+    private wikiApi: WikiService,
     private recentPlants: RecentPlantsService
   ) {}
 
@@ -71,7 +72,6 @@ export class SearchedPlantComponent implements OnInit {
         this.results.data.forEach((plant: Plant) => {
           let name = plant.common_name;
           this.getBingImage(iteration, name);
-         
         });
       });
   }
@@ -103,7 +103,7 @@ export class SearchedPlantComponent implements OnInit {
   }
 
   getWikiDetail(name: string): void {
-    this.WikiApi.getWiki(name).subscribe((result: WikiSearch) => {
+    this.wikiApi.getWiki(name).subscribe((result: WikiSearch) => {
       console.log('wiki name', name);
       this.wikiResult = result;
       this.wikiQueryList = this.wikiResult.query.search;

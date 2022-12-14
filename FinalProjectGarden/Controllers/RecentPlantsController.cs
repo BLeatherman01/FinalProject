@@ -20,36 +20,26 @@ namespace FinalProjectGarden.Controllers
             _context = context;
         }
 
-        // GET: api/RecentPlants
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<RecentPlant>>> GetRecentPlants()
+        public async Task<ActionResult<IEnumerable<RecentPlant>>> GetFav(string googleId)
         {
-            return await _context.RecentPlants.ToListAsync();
+            int userId = (int)_context.Users.First(g => g.GoogleId == googleId).Id;
+            int favGardenId = (int)_context.MyGardens.First(g => g.GardenId == userId).Id;
+            return await _context.RecentPlants.Where(rp => rp.GardenId == favGardenId).ToArrayAsync();
         }
 
-        // GET: api/RecentPlants/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<RecentPlant>> GetRecentPlant(int id)
-        {
-            var recentPlant = await _context.RecentPlants.FindAsync(id);
-
-            if (recentPlant == null)
-            {
-                return NotFound();
-            }
-
-            return recentPlant;
-        }
+      
 
         // PUT: api/RecentPlants/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecentPlant(int id, RecentPlant recentPlant)
+        public async Task<IActionResult> PutRecentPlant(int id, RecentPlant recentPlant, string gardenName)
         {
-            if (id != recentPlant.GardenId)
+            if (id != recentPlant.Id)
             {
                 return BadRequest();
             }
+            recentPlant.GardenId = (int)_context.MyGardens.First(g => g.GardenName == gardenName).Id;
 
             _context.Entry(recentPlant).State = EntityState.Modified;
 
@@ -71,6 +61,8 @@ namespace FinalProjectGarden.Controllers
 
             return NoContent();
         }
+
+        
 
         // POST: api/RecentPlants/gardenId
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

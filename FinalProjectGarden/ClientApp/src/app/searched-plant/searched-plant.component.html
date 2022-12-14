@@ -4,7 +4,6 @@
         <input type="text" [(ngModel)]="searchPlants" />
         <button class="button-tester" (click)="getPlantDetails();"> Search for {{searchPlants}}</button>
     </div>
-
     <ul class="list-items" *ngIf="bingImageList.length === plantList.length">
         <li class="searchedplantz" *ngFor="let p of plantList; index as i">
             <p>Name: {{p.common_name}} </p>
@@ -18,3 +17,4 @@
     <p class="wiki-item">{{wikiSnippet}}
     </p>
 </div>
+

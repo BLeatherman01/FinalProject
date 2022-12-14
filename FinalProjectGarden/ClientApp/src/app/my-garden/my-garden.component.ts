@@ -9,7 +9,7 @@ import { Plant, SearchPlant } from '../Services/searched-plant';
 import { SearchedPlantService } from '../Services/searched-plant.service';
 import { Users } from '../Services/users';
 
-styleUrls: ['./my-garden.component.css'];
+
 
 @Component({
   selector: 'app-my-garden',
@@ -21,6 +21,9 @@ export class MyGardenComponent implements OnInit {
   loggedIn: boolean = false;
   showCard: boolean = false;
   users: Users[] = [];
+  showGardenCard: boolean = false;
+  hideGardenCards: boolean [] = [];
+  
   listGardens: MyGarden[] = [];
   listPlants: RecentPlants [] = [];
   apiPlant: Plant[] = [];
@@ -29,9 +32,10 @@ export class MyGardenComponent implements OnInit {
   waterFreq: number[] = [];
   season: string[] = [];
   gardenName: string[] = [];
+  newGarden: string = '';
   description: string[] = [];
   notes: string[] = [];
-  hideCards: boolean[] = [];
+  hideCards: boolean [] = [];
   garId: Users = {} as Users;
   gooid = this.users.map(g => g.googleID);
 
@@ -43,7 +47,7 @@ export class MyGardenComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getUserGarden();
+    this.getMyFavPlant();
   }
 
   UpdateGarden(index: number) {
@@ -62,7 +66,20 @@ export class MyGardenComponent implements OnInit {
         this.listGardens;
       });
   }
-
+  makeGarden():void{
+    this.authService.authState.subscribe((user) =>{
+      this.user = user;
+      this.loggedIn = user != null;
+    this.gardenService.makeNewGarden(this.newGarden, this.user.id).subscribe((result:MyGarden)=>{
+      console.log(result);
+    })
+  
+  });
+  
+  }
+  
+  
+  
   RemoveFromGarden(index: number): void {
     this.gardenService
       .DeleteMyGardens(this.listGardens[index].id)
@@ -70,32 +87,38 @@ export class MyGardenComponent implements OnInit {
         this.listGardens.splice(index, 1);
       });
   }
-
   
-  getUserGarden() {
-    this.authService.authState.subscribe((user) => {
+  getMyFavPlant(): void {
+     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = user != null;
-      this.gooid.map(gg => gg)
-        this.gardenService
-        .GetMyGardens(this.users.map(gg => gg.id).toLocaleString())
-        .subscribe((result: MyGarden[]) => {
-          this.listGardens = result;
-        //   //console.log("1"+ this.listGardens[0].plantId);
-        //   this.listGardens.forEach((pid: MyGarden) => {
-        //     //console.log(pid.plantId);
-        //     this.searchedPlantService
-        //       .getPlantById(pid.plantId)
-        //       .subscribe((result: Plant) => {
-        //         this.apiPlant.push(result);
-        //         this.apiPlant.forEach((plant: Plant) => {
-        //           this.hideCards.push(false);
-        //         });
-        //         //console.log("2"+ result.common_name);
-        //       });
-        //   });
-        // });
-    });
+      this.recentPlants
+     .getMyFavPlants(this.user.id)
+     .subscribe((result: RecentPlants[]) => {
+      this.listPlants = result;
+     });
   })
 }
+  // getUserGarden() {
+    
+  //       .GetMyGardens(this.user.id)
+  //       .subscribe((result: MyGarden[]) => {
+  //         this.listGardens = result;
+  //       //   //console.log("1"+ this.listGardens[0].plantId);
+  //       //   this.listGardens.forEach((pid: MyGarden) => {
+  //       //     //console.log(pid.plantId);
+  //       //     this.searchedPlantService
+  //       //       .getPlantById(pid.plantId)
+  //       //       .subscribe((result: Plant) => {
+  //       //         this.apiPlant.push(result);
+  //       //         this.apiPlant.forEach((plant: Plant) => {
+  //       //           this.hideCards.push(false);
+  //       //         });
+  //       //         //console.log("2"+ result.common_name);
+  //       //       });
+  //       //   });
+  //       // });
+  //   });
+  
+
 }
