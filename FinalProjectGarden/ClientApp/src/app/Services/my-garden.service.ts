@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MyGarden } from './my-garden';
 import { Observable } from 'rxjs';
+import { RecentPlants } from './recent-plants';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,7 @@ export class MyGardenService {
     @Inject('BASE_URL') private baseUrl: string
   ) {}
 
-  PlantingGarden(garden: MyGarden, googleid: string): Observable<MyGarden> {
+  PlantingGarden(garden: RecentPlants, googleid: string): Observable<MyGarden> {
     return this.http.post<MyGarden>(
       this.baseUrl + `api/MyGardens?googleId=${googleid}`,
       garden

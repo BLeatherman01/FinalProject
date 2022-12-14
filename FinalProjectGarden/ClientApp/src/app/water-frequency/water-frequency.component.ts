@@ -40,25 +40,25 @@ export class WaterFrequencyComponent implements OnInit {
 
  
  
-  getUserGarden() {
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = user != null;
-      this.myGardens
-        .GetMyGardens(this.user.id)
-        .subscribe((result: MyGarden[]) => {
-          this.listGardens = result;
-          //console.log("1"+ this.listGardens[0].plantId);
-          this.listGardens.forEach((pid: MyGarden) => {
-            //console.log(pid.plantId);
-            this.searchedPlantService
-              .getPlantById(pid.plantId)
-              .subscribe((result: Plant) => {
-                this.apiPlant.push(result);
-              });
-            //console.log("2"+ result.common_name);
-          });
-        });
-    });
-  }
+  // getUserGarden() {
+  //   this.authService.authState.subscribe((user) => {
+  //     this.user = user;
+  //     this.loggedIn = user != null;
+  //     this.myGardens
+  //       .GetMyGardens(this.user.id)
+  //       .subscribe((result: MyGarden[]) => {
+  //         this.listGardens = result;
+  //         //console.log("1"+ this.listGardens[0].plantId);
+  //         this.listGardens.forEach((pid: MyGarden) => {
+  //           //console.log(pid.plantId);
+  //           this.searchedPlantService
+  //             .getPlantById(pid.plantId)
+  //             .subscribe((result: Plant) => {
+  //               this.apiPlant.push(result);
+  //             });
+  //           //console.log("2"+ result.common_name);
+  //         });
+  //       });
+  //   });
+  // }
 }

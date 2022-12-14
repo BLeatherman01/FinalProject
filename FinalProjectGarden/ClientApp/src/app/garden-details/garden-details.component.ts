@@ -6,6 +6,7 @@ import { Plant, SearchPlant } from '../Services/searched-plant';
 import { SearchedPlantService } from '../Services/searched-plant.service';
 import { GardenDetailsService } from '../Services/garden-details.service';
 import { ActivatedRoute } from '@angular/router';
+import { RecentPlantsService } from '../Services/recent-plants.service';
 
 @Component({
   selector: 'app-garden-details',
@@ -19,7 +20,8 @@ export class GardenDetailsComponent implements OnInit {
     private gardenService: MyGardenService,
     private searchedPlantService: SearchedPlantService,
     private getDetailsService: GardenDetailsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private recentPlants: RecentPlantsService
   ) {}
 
   user: SocialUser = {} as SocialUser;

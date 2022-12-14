@@ -10,6 +10,8 @@ import { WikiService } from '../wiki.service';
 import { Search, WikiSearch } from '../search-wiki';
 import { MyGarden } from '../Services/my-garden';
 import { MyGardenService } from '../Services/my-garden.service';
+import { RecentPlants } from '../Services/recent-plants';
+import { RecentPlantsService } from '../Services/recent-plants.service';
 
 @Component({
   selector: 'app-potd',
@@ -43,7 +45,8 @@ export class POTDComponent implements OnInit {
     private gardenService: MyGardenService,
     private authService: SocialAuthService,
     private bingSearch: BingSearchService,
-    private WikiApi: WikiService
+    private WikiApi: WikiService,
+    private recentPlants: RecentPlantsService
 
   ) { }
 
@@ -122,16 +125,15 @@ export class POTDComponent implements OnInit {
   // }
 
   AddToGarden(plant: Plant, imageurl: string): void {
-    let newPlant: MyGarden = {
+    let newPlant: RecentPlants = {
       id: 0,
-      gardenName: "",
+      // gardenName: "",
       gardenId: 0,
       plantId: plant.id,
       plantImageUrl: imageurl,
     };
-    this.gardenService
-      .PlantingGarden(newPlant, this.user.id)
-      .subscribe((result: MyGarden) => {
+    this.recentPlants.PlantingGarden(newPlant, this.user.id)
+      .subscribe((result: RecentPlants) => {
         console.log(result);
       });
   }
