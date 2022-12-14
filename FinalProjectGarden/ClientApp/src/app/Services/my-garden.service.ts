@@ -15,10 +15,11 @@ export class MyGardenService {
 
   PlantingGarden(garden: MyGarden, googleid: string): Observable<MyGarden> {
     return this.http.post<MyGarden>(
-      this.baseUrl + `api/MyGardens?googleId=${googleid}`,
+      this.baseUrl + `api/MyGardens/Favorite?googleId=${googleid}`,
       garden
     );
   }
+
   makeNewGarden(gardenName:string, googleId:string): Observable<MyGarden>{
     return this.http.post<MyGarden>(
       this.baseUrl + `api/MyGardens?googleId=${googleId}&gardenName=${gardenName}`,

@@ -38,6 +38,7 @@ export class POTDComponent implements OnInit {
 
 
   RandomNameArray : string[] = ['"Sansevieria"','"Helianthus annuus"','"Tiger Lily"','"Cynara cardunculus"','"Woodland Strawberry"','"Gonialoe variegata"'];
+  UsersService: any;
 
   constructor(
     private plantApi: SearchedPlantService,
@@ -61,7 +62,6 @@ export class POTDComponent implements OnInit {
 
         // added stuff 
         this.getBingImage(0,this.list[0].common_name);
-
 
         this.authService.authState.subscribe((user) => {
         this.user = user;
