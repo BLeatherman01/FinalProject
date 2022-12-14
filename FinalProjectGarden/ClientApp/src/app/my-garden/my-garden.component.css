@@ -25,7 +25,10 @@
   margin: 0 auto;
 
 }
-
+.input-container {
+  align-self: center;
+  margin-bottom: 10px;
+}
 h3 {
   color: white;
   font-size: 25px;
@@ -38,10 +41,10 @@ h3 {
   border-radius: 6px;
   color: white;
   background-color: rgba(0, 116, 25);
-  padding: 22px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  width: 375px;
+  width: 325px;
 }
 .garden-list {
   list-style: none;
@@ -49,10 +52,10 @@ h3 {
   border-radius: 6px;
   color: white;
   background-color: rgba(0, 116, 25);
-  padding: 22px;
+  padding: 14px;
   display: flex;
   flex-direction: column;
-  width: 375px;
+  width: 325px;
 }
 .garden-items{
   display: flex;
@@ -107,7 +110,7 @@ h3 {
 }
 .buttontester {
   display: inline-block;
-  padding: 12px 18px;
+  padding: 6px 8px;
   font-size: 15px;
   margin-top: 15px;
   cursor: pointer;
@@ -126,6 +129,32 @@ h3 {
 }
 
 .buttontester:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.button-tester {
+  display: inline-block;
+  padding: 8px 12px;
+  font-size: 15px;
+  margin-left: 15px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 6px #999;
+}
+
+.button-tester:hover {
+  background-color: #3e8e41;
+}
+
+.button-tester:active {
   background-color: #3e8e41;
   box-shadow: 0 5px #666;
   transform: translateY(4px);

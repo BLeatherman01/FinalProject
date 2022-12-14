@@ -53,9 +53,9 @@ export class SearchedPlantComponent implements OnInit {
     });
   }
 
-  AddToGarden(plant: Plant, imageurl: string): void {
+  AddToGarden(commonName: Plant, imageurl: string): void {
      this.recentPlants
-      .AddPlantToFavorite(plant.id,imageurl, this.user.id)
+      .AddPlantToFavorite(commonName.common_name,imageurl, this.user.id)
       .subscribe((result: RecentPlants) => {
         console.log(result);
       });
@@ -81,23 +81,15 @@ export class SearchedPlantComponent implements OnInit {
       .subscribe((result: SearchImages) => {
         this.bingImageResults = result;
         for (let i: number = 0; i < this.plantList.length; i++) {
-          // console.log("Please help",  this.bingImageResults.value[1].contentUrl.startsWith('http'))
-          // console.log("what is this", this.bingImageList[i] = this.bingImageResults.value[1].contentUrl)
+         
           if (
             this.plantList[i].common_name ===
             this.bingImageResults.queryContext.originalQuery
           ) {
-            // if (!this.bingImageResults.value[1].contentUrl.startsWith("https"))
-            // {
-            //
-            // }
-            // else
+            
             this.bingImageList[i] = this.bingImageResults.value[1].contentUrl;
-            // break;;
+            
           }
-          // else{
-          //   this.bingImageList[i] = '/assets/Garden.jpg';
-          // }
         }
       });
   }

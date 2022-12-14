@@ -14,15 +14,19 @@ export class RecentPlantsService {
     
   }
   
-  AddPlantToFavorite(plantid:string, plantimgurl:string, googleid: string): Observable<RecentPlants> {
+  AddPlantToFavorite(commonName:string, plantimgurl:string, googleid: string): Observable<RecentPlants> {
     return this.http.post<RecentPlants>(
-      this.baseUrl + `api/RecentPlants?googleId=${googleid}&plantId=${plantid}&img=${plantimgurl}`,
+      this.baseUrl + `api/RecentPlants?googleId=${googleid}&commonName=${commonName}&img=${plantimgurl}`,
       {}
     );
   }
 
   getMyFavPlants(googleid: string): Observable<RecentPlants[]> {
     return this.http.get<RecentPlants[]>(this.baseUrl + `api/RecentPlants?googleId=${googleid}`);
+  }
+
+  getAllPlantedPlants(googleid: string): Observable<RecentPlants[]>{
+    return this.http.get<RecentPlants[]>(this.baseUrl + `api/RecentPlants/PlantsInGarden?googleId=${googleid}` )
   }
 
 }

@@ -78,7 +78,7 @@ namespace FinalProjectGarden.Controllers
             myGarden.Id = null;
             myGarden.GardenName = gardenName;
             myGarden.GardenId = (int)_context.Users.First(u => u.GoogleId == googleId).Id;
-            myGarden.GardenId = (int)_context.MyGardens.First(g => g.GardenName == gardenName).Id;
+       
             _context.MyGardens.Add(myGarden);
             await _context.SaveChangesAsync();
 
