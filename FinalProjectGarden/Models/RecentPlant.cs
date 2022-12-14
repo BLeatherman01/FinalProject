@@ -19,7 +19,7 @@ public partial class RecentPlant
 
     public string? PlantImageUrl { get; set; }
 
-    public int? GardenId { get; set; }
+    public int GardenId { get; set; }
     [System.Text.Json.Serialization.JsonIgnore]
     public virtual MyGarden? Garden { get; set; }
 }

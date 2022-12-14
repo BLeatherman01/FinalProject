@@ -60,7 +60,6 @@ export class MyGardenComponent implements OnInit {
       .UpdateMyGardens(this.listGardens[index].id, this.listGardens[index])
       .subscribe((result: MyGarden) => {
         this.listGardens;
-        console.log('Freeeeeeee' + result);
       });
   }
 
@@ -78,7 +77,6 @@ export class MyGardenComponent implements OnInit {
       this.user = user;
       this.loggedIn = user != null;
       this.gooid.map(gg => gg)
-      console.log("SHEZZZ")
         this.gardenService
         .GetMyGardens(this.users.map(gg => gg.id).toLocaleString())
         .subscribe((result: MyGarden[]) => {

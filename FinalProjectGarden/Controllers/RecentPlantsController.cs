@@ -75,10 +75,15 @@ namespace FinalProjectGarden.Controllers
         // POST: api/RecentPlants/gardenId
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<RecentPlant>> PostRecentPlant(int gardenId, RecentPlant recentPlant)
+        public async Task<ActionResult<RecentPlant>> PostRecentPlant(string googleId, string plantId, string img)
         {
+            RecentPlant recentPlant = new RecentPlant();
             recentPlant.Id = null;
-            recentPlant.GardenId = (int)_context.Users.First(g => g.Id == gardenId).Id;
+            recentPlant.PlantId = plantId;
+            recentPlant.PlantImageUrl = img;
+            int userId = (int)_context.Users.First(g => g.GoogleId == googleId).Id;
+            //FINDING FAVORITE GARDEN BY USERID
+            recentPlant.GardenId=(int)_context.MyGardens.First(g => g.GardenId== userId).Id;
             _context.RecentPlants.Add(recentPlant);
             await _context.SaveChangesAsync();
 

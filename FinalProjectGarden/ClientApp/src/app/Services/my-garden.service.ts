@@ -13,7 +13,7 @@ export class MyGardenService {
     @Inject('BASE_URL') private baseUrl: string
   ) {}
 
-  PlantingGarden(garden: RecentPlants, googleid: string): Observable<MyGarden> {
+  PlantingGarden(garden: MyGarden, googleid: string): Observable<MyGarden> {
     return this.http.post<MyGarden>(
       this.baseUrl + `api/MyGardens?googleId=${googleid}`,
       garden

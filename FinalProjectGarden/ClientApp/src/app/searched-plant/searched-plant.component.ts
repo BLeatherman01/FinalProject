@@ -53,15 +53,8 @@ export class SearchedPlantComponent implements OnInit {
   }
 
   AddToGarden(plant: Plant, imageurl: string): void {
-    let newPlant: RecentPlants = {
-      id: 0,
-      //gardenName: '',
-      gardenId: 0,
-      plantId: plant.id,
-      plantImageUrl: imageurl,
-    };
-    this.recentPlants
-      .PlantingGarden(newPlant, this.user.id)
+     this.recentPlants
+      .AddPlantToFavorite(plant.id,imageurl, this.user.id)
       .subscribe((result: RecentPlants) => {
         console.log(result);
       });
@@ -123,19 +116,4 @@ export class SearchedPlantComponent implements OnInit {
       // }
     });
   }
-
-  //***additional image API if needed  */
-  // getImageDetails(): void {
-  //   this.ImageApi.getImages(this.searchPlants).subscribe(
-  //     (result: SearchImage) => {
-  //       if (result.hits[0]) {
-  //         console.log('check results', result.hits[0].previewURL);
-  //         this.imageList.push(result.hits[0].previewURL);
-  //         console.log('hits', result.hits[0]);
-  //       } else {
-  //         this.imageList.push('/assets/Garden.jpg');
-  //       }
-  //     }
-  //   );
-  // }
 }

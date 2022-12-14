@@ -84,73 +84,21 @@ export class POTDComponent implements OnInit {
         console.log(this.bingImageResults)
         console.log(this.list);
         for (let i: number = 0; i <= 1; i++) {
-     
-            // console.log("Please help",  this.bingImageResults.value[1].contentUrl.startsWith('http'))
-            // console.log("what is this", this.bingImageList[i] = this.bingImageResults.value[1].contentUrl)
           if (this.list[i].common_name === this.bingImageResults.queryContext.originalQuery) {
-           
-            // if (!this.bingImageResults.value[1].contentUrl.startsWith("https")) 
-            // {  
-            //   
-            // } 
-            // else 
               this.bingImageList[i] = this.bingImageResults.value[1].contentUrl
-              // break;;
           }
-          // else{
-          //   this.bingImageList[i] = '/assets/Garden.jpg';
-          // }
         }
       });
   }
 
 
-
-
-
-
-
-
-
-
-  // getImageDetails(): void {
-  //   this.ImageApi.getImages(this.searchPlants).subscribe(
-  //     (result: SearchImage) => {
-  //       this.imageResults = result;
-  //       this.imageList = this.imageResults.hits;
-  //       console.log(this.imageResults);
-  //       this.plantImage = this.imageList[2];
-  //     }
-  //   );
-  // }
-
   AddToGarden(plant: Plant, imageurl: string): void {
-    let newPlant: RecentPlants = {
-      id: 0,
-      // gardenName: "",
-      gardenId: 0,
-      plantId: plant.id,
-      plantImageUrl: imageurl,
-    };
-    this.recentPlants.PlantingGarden(newPlant, this.user.id)
+    this.recentPlants
+      .AddPlantToFavorite(plant.id,imageurl, this.user.id)
       .subscribe((result: RecentPlants) => {
         console.log(result);
       });
   }
-
-  // getPlantDetails(): void {
-  //   this.plantApi
-  //     .getPlants(this.searchPlants)
-  //     .subscribe((result: SearchPlant) => {
-  //       this.results = result;
-  //       this.plantList = this.results.data;
-  //       let iteration: number = 1;
-  //       this.results.data.forEach((plant: Plant) => {
-  //         let name = plant.common_name;
-  //         this.getBingImage(iteration, name);
-  //       });
-  //     });
-  // }
 
   //  getWikiDetail(name:string):void{
 

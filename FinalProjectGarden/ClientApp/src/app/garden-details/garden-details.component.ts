@@ -70,8 +70,6 @@ export class GardenDetailsComponent implements OnInit {
   }
 
 
-
-
   getUserGarden() {
     this.authService.authState.subscribe((user) => {
       this.user = user;

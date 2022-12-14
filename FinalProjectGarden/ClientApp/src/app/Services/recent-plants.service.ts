@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MyGarden } from './my-garden';
 import { Observable } from 'rxjs';
+import { RecentPlants } from './recent-plants';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,10 @@ export class RecentPlantsService {
     
   }
   
-  PlantingGarden(garden: MyGarden, googleid: string): Observable<any> {
-    return this.http.post<any>(
-      this.baseUrl + `api/MyGardens?googleId=${googleid}`,
-      garden
+  AddPlantToFavorite(plantid:string, plantimgurl:string, googleid: string): Observable<RecentPlants> {
+    return this.http.post<RecentPlants>(
+      this.baseUrl + `api/RecentPlants?googleId=${googleid}&plantId=${plantid}&img=${plantimgurl}`,
+      {}
     );
   }
 
