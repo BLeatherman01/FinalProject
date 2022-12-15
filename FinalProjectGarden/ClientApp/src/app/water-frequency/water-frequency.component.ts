@@ -32,6 +32,7 @@ export class WaterFrequencyComponent implements OnInit {
   notes: string[] = [];
   hideCards: boolean[] = [];
   plantedPlants: RecentPlants[] = [];
+  needsWater:RecentPlants[] = [];
   constructor(
     private myGardens: MyGardenService,
     private authService: SocialAuthService,
@@ -47,10 +48,8 @@ export class WaterFrequencyComponent implements OnInit {
         .getAllPlantedPlants(this.user.id)
         .subscribe((result: RecentPlants[]) => {
           this.plantedPlants = result;
-          console.log("water result", result)
           this.getWaterDate();
 
-          console.log(result);
         });
       this.getUserGarden();
     });
@@ -69,7 +68,6 @@ export class WaterFrequencyComponent implements OnInit {
 
    
     let waterDate = new Date(this.plantedPlants[i].plantDate!);
-    console.log("waterdate", waterDate);
     //need to get difference of plant and todays date
 
     let datePipe: DatePipe = new DatePipe('en-US');
@@ -87,14 +85,11 @@ export class WaterFrequencyComponent implements OnInit {
         (1000 * 60 * 60 * 24)
     );
 
-    console.log(datePipe.transform(todaysDate, 'shortDate'));
-    console.log('differnce between dates', difference);
     if(difference > 0){
-      console.log("not planted")
     }
    else if (difference % this.plantedPlants[i].wateringFreq! === 0) {
       let waterMe = 'water Me';
-      console.log(waterMe);
+      this.needsWater.push(this.plantedPlants[i]);
     }
   }
   }

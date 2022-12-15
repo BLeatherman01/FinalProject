@@ -1,5 +1,5 @@
 import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MyGarden } from '../Services/my-garden';
 import { MyGardenService } from '../Services/my-garden.service';
 import { Plant, SearchPlant } from '../Services/searched-plant';
@@ -52,7 +52,7 @@ export class GardenDetailsComponent implements OnInit {
       this.user = user;
       this.loggedIn = user != null;
        
-      console.log("getGardenPlants", this.getUserGarden())
+      
       //  this.getUserGarden();
     });
     this.sub = this.route.paramMap.subscribe((params) => {
@@ -61,7 +61,7 @@ export class GardenDetailsComponent implements OnInit {
         .GetMyGardensDetails(this.searchID)
         .subscribe((result: MyGarden) => {
           this.searchedgarden = result;
-          console.log(result);
+
           this.getGardenPlants();
         });
     });
@@ -81,7 +81,9 @@ export class GardenDetailsComponent implements OnInit {
       .getPlantsInGarden(this.searchedgarden.id)
       .subscribe((result: RecentPlants[]) => {
        this.listPlants = result;
-        console.log("list plants", this.listPlants);
+
+        
+
       });
   }
 
@@ -90,8 +92,7 @@ export class GardenDetailsComponent implements OnInit {
         .GetMyGardens(this.user.id)
         .subscribe((result: MyGarden[]) => {
           this.listGardens = result;
-          console.log(this.listGardens)
-          });
 
+          });
   }
 }
