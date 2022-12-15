@@ -43,7 +43,7 @@ export class SearchedPlantComponent implements OnInit {
     private authService: SocialAuthService,
     private bingSearch: BingSearchService,
     private wikiApi: WikiService,
-    private recentPlants: RecentPlantsService
+    private recentPlantsService: RecentPlantsService
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +54,7 @@ export class SearchedPlantComponent implements OnInit {
   }
 
   AddToGarden(commonName: Plant, imageurl: string): void {
-     this.recentPlants
+     this.recentPlantsService
       .AddPlantToFavorite(commonName.common_name,imageurl, this.user.id)
       .subscribe((result: RecentPlants) => {
         console.log(result);

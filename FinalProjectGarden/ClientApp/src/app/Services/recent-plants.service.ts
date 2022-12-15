@@ -23,7 +23,7 @@ export class RecentPlantsService {
   //working
   UpdateMyGardens(googleId:string, id: number, plant: RecentPlants): Observable<RecentPlants> {
     console.log("gardenName",id)
-    return this.http.put<RecentPlants>(this.baseUrl + `api/RecentPlants?googleId=${googleId}&gardenId=${id}`, plant);
+    return this.http.put<RecentPlants>(this.baseUrl + `api/RecentPlants?googleId=${googleId}&gardenId=${plant.gardenId}`, plant);
   }
   //working
   getMyFavPlants(googleid: string): Observable<RecentPlants[]> {

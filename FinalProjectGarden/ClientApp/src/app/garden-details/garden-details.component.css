@@ -65,12 +65,7 @@
     justify-content: last baseline;
     display: flex;
   }
-  .user-name {
-    color: white;
-    justify-content: left;
-    font-size: 25px;
-  }
-  
+ 
   .buttontester {
     display: inline-block;
     padding: 12px 18px;

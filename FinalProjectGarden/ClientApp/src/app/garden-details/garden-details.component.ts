@@ -78,11 +78,18 @@ export class GardenDetailsComponent implements OnInit {
       });
   }
   getGardenPlants(): void {
-    // console.log('here', this.listPlants[0].id);
+    //  console.log('here', this.listPlants[0].id);
     this.recentPlantsService
       .getAllPlantedPlants(this.user.id)
       .subscribe((result: RecentPlants[]) => {
-        this.listPlants = result;
+       
+        for(let i = 0; i <= this.listPlants.length; i++ ){
+             if(result[i].gardenId === this.searchedgarden.id){
+              this.listPlants.push(result[i]);
+              console.log(result[i]);
+             }
+                
+        }
         console.log("list plants", this.listPlants);
       });
   }

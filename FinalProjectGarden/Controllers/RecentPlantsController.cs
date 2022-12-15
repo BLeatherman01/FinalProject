@@ -70,11 +70,11 @@ namespace FinalProjectGarden.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<RecentPlant>> UpdateGardenDetails(string googleId, RecentPlant plant, int id)
+        public async Task<ActionResult<RecentPlant>> UpdateGardenDetails(string googleId, RecentPlant plant, int gardenId)
         {
             RecentPlant recentPlant = plant;
-            int userId = (int)_context.Users.First(g => g.GoogleId == googleId).Id;
-            recentPlant.GardenId = (int)_context.MyGardens.First(g => g.GardenId == userId).Id;
+            //int userId = (int)_context.Users.First(g => g.GoogleId == googleId).Id;
+            //recentPlant.GardenId = (int)_context.MyGardens.First(g => g.GardenId == userId).Id;
             _context.RecentPlants.Update(recentPlant);
             await _context.SaveChangesAsync();
             return recentPlant;
