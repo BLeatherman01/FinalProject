@@ -59,27 +59,14 @@ export class WaterFrequencyComponent implements OnInit {
       .GetMyGardens(this.user.id)
       .subscribe((result: MyGarden[]) => {
         this.listGardens = result;
-        //console.log("1"+ this.listGardens[0].plantId);
-        // this.listGardens.forEach((pid: MyGarden) => {
-        //   //console.log(pid.plantId);
-        //   this.searchedPlantService
-        //     .getPlantById(pid.plantId)
-        //     .subscribe((result: Plant) => {
-        //       this.apiPlant.push(result);
-        //       this.apiPlant.forEach((plant: Plant) => {
-        //         this.hideCards.push(false);
-        //       });
-        //       //console.log("2"+ result.common_name);
-        //     });
-        // });
       });
   }
-
+  //working
   getWaterDate() {
     let todaysDate: Date = new Date();
 
-    let waterDate: Date = this.plantedPlants[1].plantDate!;
-
+    let waterDate = new Date(this.plantedPlants[0].plantDate!);
+    console.log(waterDate);
     //need to get difference of plant and todays date
 
     let datePipe: DatePipe = new DatePipe('en-US');

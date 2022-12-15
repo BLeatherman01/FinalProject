@@ -50,28 +50,29 @@ export class MyGardenComponent implements OnInit {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = user != null;
-    this.getUserGarden();
+      this.getUserGarden();
+    });
+
     this.getMyFavPlant();
-  });
-  this.UsersService.AddUser(this.user.name, this.user.id);
   }
 
+  //works
   UpdateGarden(index: number) {
-    this.hideCards[index] = true;
-    this.listGardens[index].gardenName = this.gardenName[index];
-    this.listGardens[index].description = this.description[index];
     this.listPlants[index].plantDate = this.plantDate[index];
     this.listPlants[index].pickBloom = this.pickDate[index];
     this.listPlants[index].wateringFreq = this.waterFreq[index];
     this.listPlants[index].season = this.season[index];
-    this.listGardens[index].notes = this.notes[index];
-    this.gardenService
-      .UpdateMyGardens(this.listGardens[index].id, this.listGardens[index])
-      .subscribe((result: MyGarden) => {
-        this.listGardens;
+    this.recentPlants
+      .UpdateMyGardens(
+        this.user.id,
+        this.listPlants[index].gardenId,
+        this.listPlants[index]
+      )
+      .subscribe((result: RecentPlants) => {
+        this.listPlants[0] = result;
       });
   }
-
+//this works
   makeGarden(): void {
     this.gardenService
       .makeNewGarden(this.newGarden, this.user.id)
@@ -79,15 +80,20 @@ export class MyGardenComponent implements OnInit {
         console.log(result);
       });
   }
-
+//this works
   RemoveFromGarden(index: number): void {
-    this.gardenService
-      .DeleteMyGardens(this.listGardens[index].id)
-      .subscribe((result: MyGarden) => {
-        this.listGardens.splice(index, 1);
+    this.recentPlants
+      .DeleteMyGardensPlants(this.listPlants[index].id)
+      .subscribe((result: RecentPlants) => {
+        this.listPlants.splice(index, 1);
       });
   }
-
+  //works
+  deleteGarden(index:number):void{
+    this.gardenService.DeleteMyGardens(this.listGardens[index].id).subscribe((result: MyGarden)=>{
+   console.log(result)});
+  }
+//this works
   getMyFavPlant(): void {
     this.recentPlants
       .getMyFavPlants(this.user.id)
@@ -95,26 +101,13 @@ export class MyGardenComponent implements OnInit {
         this.listPlants = result;
       });
   }
-
+//this works
   getUserGarden(): void {
     this.gardenService
       .GetMyGardens(this.user.id)
       .subscribe((result: MyGarden[]) => {
         this.listGardens = result;
-        //   //console.log("1"+ this.listGardens[0].plantId);
-        //   this.listGardens.forEach((pid: MyGarden) => {
-        //     //console.log(pid.plantId);
-        //     this.searchedPlantService
-        //       .getPlantById(pid.plantId)
-        //       .subscribe((result: Plant) => {
-        //         this.apiPlant.push(result);
-        //         this.apiPlant.forEach((plant: Plant) => {
-        //           this.hideCards.push(false);
-        //         });
-        //         //console.log("2"+ result.common_name);
-        //       });
-        //   });
-        // });
       });
   }
+
 }

@@ -1,8 +1,8 @@
 <div *ngIf="loggedIn">
 	<!-- <img src="{{ user.photoUrl }}"> -->
 	<div>
-		<h3 class="my-garden-text">Hello {{ user.name }}, Please feel free to add context to the plants you have
-			added to your garden!</h3>
+		<h1 class="my-garden-text">Hello {{ user.name }}, Please feel free to add context to the plants you have
+			added to your garden!</h1>
 		<!-- <p>{{ user.email }}</p> -->
 		<!--<p>{{ user.id }}</p> Google Auth ID to log in SQL-->
 	</div>
@@ -12,12 +12,14 @@
 			<input type="text" [(ngModel)]="newGarden" />
 			<button class="button-tester" (click)="makeGarden()">Create a New Garden</button>
 		</div>
-		<h3>Favorites</h3>
+		<h2>Favorites</h2>
 		<ul class="list-items">
 			<li class="plant-detail" *ngFor="let plant of listPlants; index as i">
 				<div class="plant-list">
 					<p> Plant Name: {{plant.plantId}}</p> 
-					<p> Select Garden: <input [(ngModel)]="gardenName[i]" type="text"></p>
+					<p> Select Garden: <select [(ngModel)]="gardenName[i]" type="text">
+						<option *ngFor="let garden  of listGardens">{{garden.gardenName}}</option>
+					</select></p>
 					<p> Description: <input [(ngModel)]="description[i]" type="text"></p>
 					<p> Date Planted: <input [(ngModel)]="plantDate[i]" type="date" min="2022-12-07"></p>
 					<p> Pick Bloom: <input [(ngModel)]="pickDate[i]" type="date" min="2022-12-07"></p>
@@ -32,7 +34,7 @@
 						</select>
 					</p>
 					<p> Additional Notes: <input [(ngModel)]="notes[i]" type="text"></p>
-					<button class="buttontester" (click)="UpdateGarden(i)">Add plant</button>
+					<button class="buttontester" (click)="UpdateGarden(i)">Add To Garden</button>
 					<button class="buttontester" (click)="RemoveFromGarden(i)">Remove plant</button>
 				</div>
 			</li>
@@ -45,7 +47,7 @@
 				<p> Garden Name: {{garden.gardenName}}</p>
 				<button class="buttontester" [routerLink]="['/GardenDetails',garden.gardenName]"> View More
 					Details!</button>
-				<button class="buttontester" (click)="RemoveFromGarden(i)">Remove Garden</button>
+				<button class="buttontester" (click)="deleteGarden(i)">Remove Garden</button>
 			</li>
 		</ul>
 	</div>

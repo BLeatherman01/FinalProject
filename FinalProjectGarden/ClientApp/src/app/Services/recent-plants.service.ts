@@ -20,13 +20,26 @@ export class RecentPlantsService {
       {}
     );
   }
-
+  //working
+  UpdateMyGardens(googleId:string, id: number, plant: RecentPlants): Observable<RecentPlants> {
+    console.log("gardenName",id)
+    return this.http.put<RecentPlants>(this.baseUrl + `api/RecentPlants?googleId=${googleId}&gardenId=${id}`, plant);
+  }
+  //working
   getMyFavPlants(googleid: string): Observable<RecentPlants[]> {
     return this.http.get<RecentPlants[]>(this.baseUrl + `api/RecentPlants?googleId=${googleid}`);
   }
-
-  getAllPlantedPlants(googleid: string): Observable<RecentPlants[]>{
-    return this.http.get<RecentPlants[]>(this.baseUrl + `api/RecentPlants/PlantsInGarden?googleId=${googleid}` )
+  //working
+  DeleteMyGardensPlants(id: number): Observable<RecentPlants> {
+    return this.http.delete<RecentPlants>(this.baseUrl + `api/RecentPlants/${id}`);
   }
-
+  //working
+  getAllPlantedPlants(googleid: string): Observable<RecentPlants[]>{
+    return this.http.get<RecentPlants[]>(this.baseUrl + `api/RecentPlants/PlantsInGarden?googleId=${googleid}` );
+  }
+   //working
+  getPlantedDetails(googleId:string, id: number):Observable<RecentPlants[]>{
+    console.log("garden Id", id)
+    return this.http.get<RecentPlants[]>(this.baseUrl + `api/RecentPlants/?googleId=${googleId}&gardenId${id}` );
+  }
 }

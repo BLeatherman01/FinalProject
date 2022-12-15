@@ -1,14 +1,14 @@
 <div class="item-container">
     <h3>~Your Plants in ~</h3>
     <ul class="list-items">
-        <li *ngFor="let garden of listGardens; index as i" class="plant-list">
-                <p> Plant: {{garden.notes}}</p>
-                <p> Garden Name:{{garden.gardenName}} </p>
-                <p> Description: {{garden.description}} </p>
-                <p> Date Planted: {{plantDate}}</p>
-                <p> Pick Bloom: {{pickDate}}</p>
-                <p> Watering Frequency in days: {{waterFreq}}</p>
-                <p> Season: {{season}}</p>
+        <li *ngFor="let garden of listPlants; index as i" class="plant-list">
+                <p> Plant: {{garden.plantId}}</p>
+                <!-- <p> Garden Name:{{garden.gardenName}} </p> -->
+                <!-- <p> Description: {{garden.description}} </p> -->
+                <p> Date Planted: {{garden.plantDate}}</p>
+                <p> Pick Bloom: {{garden.pickBloom}}</p>
+                 <p> Watering Frequency in days: {{garden.wateringFreq}}</p>
+                <p> Season: {{garden.season}}</p>
                 <button class="buttontester" (click)="RemoveFromGarden(i)">Remove plant</button>
         </li>
     </ul>
