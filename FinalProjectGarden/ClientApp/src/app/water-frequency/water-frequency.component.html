@@ -1,17 +1,30 @@
-<div *ngIf="loggedIn">
-    <!-- <img src="{{ user.photoUrl }}"> -->
+<div class="alert" *ngIf="needsWater.length>0">
+	<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+	<strong>HEY! Water Me!</strong> Remember to water these plants today!
+	<div *ngFor="let plant of needsWater"> 
+	<a>{{plant.plantId}} in Garden {{plant.gardenId}}</a>
+
+	</div>
+
+</div>
+
+
+
+
+
+<!-- <div *ngIf="loggedIn">
+
     <div>
         <h3 class="my-garden-text">Hello {{ user.name }}, Please feel free to add context to the plants you have
 			added to your garden!</h3>
-		<!-- <p>{{ user.email }}</p> -->
-		<!--<p>{{ user.id }}</p> Google Auth ID to log in SQL-->
+
 	</div>
 
 	<div class="item-container">
 		<h3>My Gardens</h3>
 		<ul class="list-items">
 			<li class="plant-list" *ngFor="let garden of plantedPlants; index as i">
-				<!-- <p>Garden Number: {{garden.gardenName}}</p> -->
+				
                 <p>Plant Name : {{garden.plantDate}}</p>
                 <p>Water : {{garden.wateringFreq}}</p>
 			<button (click)="getWaterDate()">water date</button>
@@ -22,5 +35,5 @@
        
        
         <div *ngIf="loggedIn">
-            <!-- <img src="{{ user.photoUrl }}"> -->
-            <div>
+
+<div> -->
