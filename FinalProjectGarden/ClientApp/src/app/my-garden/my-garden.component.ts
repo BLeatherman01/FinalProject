@@ -43,7 +43,7 @@ export class MyGardenComponent implements OnInit {
     private authService: SocialAuthService,
     private gardenService: MyGardenService,
     private searchedPlantService: SearchedPlantService,
-    private recentPlants: RecentPlantsService
+    private recentPlantsService: RecentPlantsService
   ) {}
 
   ngOnInit(): void {
@@ -58,15 +58,18 @@ export class MyGardenComponent implements OnInit {
 
   //works
   UpdateGarden(index: number) {
+    // this.listGardens[index].gardenName = this.gardenName[index];
+    // console.log(this.listGardens[index].gardenName);
     this.listPlants[index].plantDate = this.plantDate[index];
     this.listPlants[index].pickBloom = this.pickDate[index];
     this.listPlants[index].wateringFreq = this.waterFreq[index];
     this.listPlants[index].season = this.season[index];
-    this.recentPlants
+    this.recentPlantsService
       .UpdateMyGardens(
         this.user.id,
         this.listPlants[index].gardenId,
         this.listPlants[index]
+
       )
       .subscribe((result: RecentPlants) => {
         this.listPlants[0] = result;
@@ -82,7 +85,7 @@ export class MyGardenComponent implements OnInit {
   }
 //this works
   RemoveFromGarden(index: number): void {
-    this.recentPlants
+    this.recentPlantsService
       .DeleteMyGardensPlants(this.listPlants[index].id)
       .subscribe((result: RecentPlants) => {
         this.listPlants.splice(index, 1);
@@ -95,7 +98,7 @@ export class MyGardenComponent implements OnInit {
   }
 //this works
   getMyFavPlant(): void {
-    this.recentPlants
+    this.recentPlantsService
       .getMyFavPlants(this.user.id)
       .subscribe((result: RecentPlants[]) => {
         this.listPlants = result;

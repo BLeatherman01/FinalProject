@@ -17,8 +17,8 @@
 			<li class="plant-detail" *ngFor="let plant of listPlants; index as i">
 				<div class="plant-list">
 					<p> Plant Name: {{plant.plantId}}</p> 
-					<p> Select Garden: <select [(ngModel)]="gardenName[i]" type="text">
-						<option *ngFor="let garden  of listGardens">{{garden.gardenName}}</option>
+					<p> Select Garden: <select [(ngModel)]="plant.gardenId" type="text">
+						<option *ngFor="let garden of listGardens">{{garden.id}}</option>
 					</select></p>
 					<p> Description: <input [(ngModel)]="description[i]" type="text"></p>
 					<p> Date Planted: <input [(ngModel)]="plantDate[i]" type="date" min="2022-12-07"></p>
