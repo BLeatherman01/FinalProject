@@ -16,6 +16,5 @@
             <button class="buttontester" (click)="getWikiDetail(p.common_name);">Learn more</button>
         </li>
     </ul>
-    <p class="wiki-item">{{wikiSnippet}}
-    </p>
+    <div  class = "wiki-item"[innerHTML]="wikiSnippet"></div>
 </div>

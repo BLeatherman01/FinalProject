@@ -12,6 +12,7 @@ import { WikiService } from '../wiki.service';
 import { Search, WikiSearch } from '../search-wiki';
 import { RecentPlants } from '../Services/recent-plants';
 import { RecentPlantsService } from '../Services/recent-plants.service';
+import { HtmlParser } from '@angular/compiler';
 
 @Component({
   selector: 'app-searched-plant',
@@ -98,7 +99,7 @@ export class SearchedPlantComponent implements OnInit {
       this.wikiResult = result;
       this.wikiQueryList = this.wikiResult.query.search;
       this.wikiSnippet = this.wikiQueryList[0].snippet;
-
+      
       console.log('list 2', this.wikiQueryList[0].snippet);
       //  let wikiElement  = document.getElementById(".wikiSnippet")
       //  if(wikiElement != null){
