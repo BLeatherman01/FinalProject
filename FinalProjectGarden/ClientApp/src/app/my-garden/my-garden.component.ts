@@ -37,6 +37,7 @@ export class MyGardenComponent implements OnInit {
   hideCards: boolean[] = [];
   garId: Users = {} as Users;
   gooid = this.users.map((g) => g.googleID);
+  UsersService: any;
 
   constructor(
     private authService: SocialAuthService,

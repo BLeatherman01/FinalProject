@@ -75,6 +75,7 @@ export class SearchedPlantComponent implements OnInit {
         });
       });
   }
+  
   getBingImage(iteration: number, name: string): void {
     this.bingSearch
       .getBingSearch(name, iteration)
