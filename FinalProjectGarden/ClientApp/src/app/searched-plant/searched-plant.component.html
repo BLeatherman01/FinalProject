@@ -10,7 +10,7 @@
             <p>Family: {{p.family}}</p>
             <img src="{{bingImageList[i]}}">
             <button *ngIf="loggedIn" class="buttontester" type="button" (click)="AddToGarden(p,bingImageList[i])">Add to
-                Favorites!</button>
+                Favorites</button>
                 <!-- <asl-google-signin-button *ngIf="!loggedIn" type='icon' size='medium'>Click to Create an Account</asl-google-signin-button> -->
               
             <button class="buttontester" (click)="getWikiDetail(p.common_name);">Learn more</button>

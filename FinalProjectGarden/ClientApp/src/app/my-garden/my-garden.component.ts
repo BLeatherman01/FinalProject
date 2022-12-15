@@ -55,26 +55,23 @@ export class MyGardenComponent implements OnInit {
     this.getMyFavPlant();
   }
 
+  //works
   UpdateGarden(index: number) {
-    this.hideCards[index] = true;
-    this.listGardens[index].gardenName = this.gardenName[index];
-    this.listGardens[index].description = this.description[index];
     this.listPlants[index].plantDate = this.plantDate[index];
     this.listPlants[index].pickBloom = this.pickDate[index];
     this.listPlants[index].wateringFreq = this.waterFreq[index];
     this.listPlants[index].season = this.season[index];
-    this.listGardens[index].notes = this.notes[index];
-    this.gardenService
+    this.recentPlants
       .UpdateMyGardens(
-        this.listPlants[index].id,
-        this.listPlants[index],
-        this.gardenName[index]
+        this.user.id,
+        this.listPlants[index].gardenId,
+        this.listPlants[index]
       )
       .subscribe((result: RecentPlants) => {
         this.listPlants[0] = result;
       });
   }
-
+//this works
   makeGarden(): void {
     this.gardenService
       .makeNewGarden(this.newGarden, this.user.id)
@@ -82,15 +79,20 @@ export class MyGardenComponent implements OnInit {
         console.log(result);
       });
   }
-
+//this works
   RemoveFromGarden(index: number): void {
-    this.gardenService
-      .DeleteMyGardens(this.listGardens[index].id)
-      .subscribe((result: MyGarden) => {
-        this.listGardens.splice(index, 1);
+    this.recentPlants
+      .DeleteMyGardensPlants(this.listPlants[index].id)
+      .subscribe((result: RecentPlants) => {
+        this.listPlants.splice(index, 1);
       });
   }
-
+  //works
+  deleteGarden(index:number):void{
+    this.gardenService.DeleteMyGardens(this.listGardens[index].id).subscribe((result: MyGarden)=>{
+   console.log(result)});
+  }
+//this works
   getMyFavPlant(): void {
     this.recentPlants
       .getMyFavPlants(this.user.id)
@@ -98,7 +100,7 @@ export class MyGardenComponent implements OnInit {
         this.listPlants = result;
       });
   }
-
+//this works
   getUserGarden(): void {
     this.gardenService
       .GetMyGardens(this.user.id)
@@ -106,4 +108,5 @@ export class MyGardenComponent implements OnInit {
         this.listGardens = result;
       });
   }
+
 }

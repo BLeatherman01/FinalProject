@@ -30,89 +30,62 @@ namespace FinalProjectGarden.Controllers
 
 
 
-        // PUT: api/RecentPlants/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutRecentPlant(int id, RecentPlant recentPlant, string gardenName)
-        {
-            if (id != recentPlant.Id)
-            {
-                return BadRequest();
-            }
-            recentPlant.GardenId = (int)_context.MyGardens.First(g => g.GardenName == gardenName).Id;
+        //// PUT: api/RecentPlants/5
+        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        //[HttpPut("{id}")]
+        //public async Task<IActionResult> PutRecentPlant(int id,  RecentPlant recentPlant, string googleId )
+        //{
+        //    int userId = (int)_context.Users.First(g => g.GoogleId == googleId).Id;
+        //    if (id != recentPlant.Id)
+        //    {
+        //        return BadRequest();
+        //    }
+        //    //recentPlant.GardenId = (int)_context.MyGardens.First(g => g.GardenName == gardenName).Id;
 
-            _context.Entry(recentPlant).State = EntityState.Modified;
+        //    _context.Entry(recentPlant).State = EntityState.Modified;
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!RecentPlantExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        await _context.SaveChangesAsync();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!RecentPlantExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return NoContent();
-        }
+        //    return NoContent();
+        //}
 
         [HttpGet("PlantsInGarden")]
         public async Task<ActionResult<IEnumerable<RecentPlant>>> GetAllPlanted(string googleId)
         {
             int userId = (int)_context.Users.First(g => g.GoogleId == googleId).Id;
-            List<int> gardenId = new List<int>(); 
-            List<MyGarden> gardenList = _context.MyGardens.Where(g => g.GardenId == userId).ToList(); 
-            for(int i = 0; i < gardenList.Count; i++)
+
+            List<int> gardenId = new List<int>();
+            List<MyGarden> gardenList = _context.MyGardens.Where(g => g.GardenId == userId).ToList();
+            for (int i = 0; i < gardenList.Count; i++)
             {
                 gardenId.Add((int)gardenList[i].Id);
 
             }
-            
-          List<RecentPlant>plantList = new List<RecentPlant>();
-            foreach(int id in gardenId) 
-            { 
-                    plantList.AddRange(_context.RecentPlants.Where(p => p.GardenId == id));            
+
+            List<RecentPlant> plantList = new List<RecentPlant>();
+            foreach (int id in gardenId)
+            {
+                plantList.AddRange(_context.RecentPlants.Where(p => p.GardenId == id));
             }
 
             return plantList;
 
         }
-        //[HttpGet("PlantedDetails")]
-        //public async Task<ActionResult<IEnumerable<RecentPlant>>> GetPlantedDetails(string googleId, int gardenId)
-        //{
-        //    //this finds user by googleId
-        //    int userId = (int)_context.Users.First(g => g.GoogleId == googleId).Id;
-
-        //    List<int> gardenDetails = new List<int>();
-
-        //    List<MyGarden> gardenList = _context.MyGardens.Where(g => g.Id == gardenId).ToList();
-            
-        //    for (int i = 0; i < gardenList.Count; i++)
-        //    {
-        //        gardenDetails.Add((int)gardenList[i].Id);
-
-        //    }
-        //    List<MyGarden>eachPlant = new List<MyGarden>();
-
-        //    eachPlant = gardenDetails.Where(gd => gd.)
-            
-        //        List<RecentPlant> plantList = new List<RecentPlant>();
-            
-        //    foreach (int id in gardenDetails)
-        //    {
-        //        plantList.AddRange(_context.RecentPlants.Where(p => p.GardenId == id ));
-        //    }
-
-        //    return plantList ;
-
-        //}
-
+     
         // POST: api/RecentPlants/gardenId
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -124,11 +97,27 @@ namespace FinalProjectGarden.Controllers
             recentPlant.PlantImageUrl = img;
             int userId = (int)_context.Users.First(g => g.GoogleId == googleId).Id;
             //FINDING FAVORITE GARDEN BY USERID
-            recentPlant.GardenId=(int)_context.MyGardens.First(g => g.GardenId== userId).Id;
+            recentPlant.GardenId = (int)_context.MyGardens.First(g => g.GardenId == userId).Id;
             _context.RecentPlants.Add(recentPlant);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetRecentPlant", new { id = recentPlant.Id }, recentPlant);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<RecentPlant>> UpdateGardenDetails(string googleId, RecentPlant plant, int id)
+        {
+            RecentPlant recentPlant = plant;
+            int userId = (int)_context.Users.First(g => g.GoogleId == googleId).Id;
+            //recentPlant.PlantDate = plantDate;
+            //recentPlant.PickBloom = pickBloom;
+            //recentPlant.WateringFreq = waterFreq;
+            //recentPlant.Season = season;
+            //recentPlant.GardenId = (int)_context.MyGardens.Where(g => g.GardenId == id).First().Id; 
+            recentPlant.GardenId = (int)_context.MyGardens.First(g => g.GardenId == userId).Id;
+            _context.RecentPlants.Update(recentPlant);
+            await _context.SaveChangesAsync();
+            return recentPlant;
         }
 
         // DELETE: api/RecentPlants/5

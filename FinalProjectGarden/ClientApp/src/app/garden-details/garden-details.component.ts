@@ -12,24 +12,24 @@ import { RecentPlants } from '../Services/recent-plants';
 @Component({
   selector: 'app-garden-details',
   templateUrl: './garden-details.component.html',
-  styleUrls: ['./garden-details.component.css']
+  styleUrls: ['./garden-details.component.css'],
 })
 export class GardenDetailsComponent implements OnInit {
-
   constructor(
     private authService: SocialAuthService,
     private gardenService: MyGardenService,
     private searchedPlantService: SearchedPlantService,
     private getDetailsService: GardenDetailsService,
     private route: ActivatedRoute,
-    private recentPlants: RecentPlantsService
+    private recentPlantsService: RecentPlantsService
   ) {}
 
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
   showCard: boolean = false;
-  listPlants: RecentPlants [] = [];
+  listPlants: RecentPlants[] = [];
   listGardens: MyGarden[] = [];
+  
   apiPlant: Plant[] = [];
   plantDate: Date[] = [];
   pickDate: Date[] = [];
@@ -40,7 +40,6 @@ export class GardenDetailsComponent implements OnInit {
   notes: string[] = [];
   hideCards: boolean[] = [];
 
-
   // this.sub = this.route.paramMap.subscribe((params) => {
   //   this.searchID = params.get('id');
   //   this.helpdeskAPI.getSpecificTicket(this.searchID).subscribe((result : Ticket) => {this.tickets.push(result)});
@@ -49,45 +48,52 @@ export class GardenDetailsComponent implements OnInit {
 
   searchID: any;
   sub: any;
-  searchedgarden : MyGarden = {} as MyGarden;
+  searchedgarden: MyGarden = {} as MyGarden;
 
   ngOnInit(): void {
-    
-  this.authService.authState.subscribe((user) => {
+    this.authService.authState.subscribe((user) => {
       this.user = user;
-      this.loggedIn = user != null; 
-    this.getGardenPlants()
-  });
-    this.sub = this.route.paramMap.subscribe((params) =>{
-      this.searchID = params.get('GardenName');
-      this.getDetailsService.GetMyGardensDetails(this.searchID).subscribe((result : MyGarden) => {this.searchedgarden = result; console.log(result)});
+      this.loggedIn = user != null;
+       this.getGardenPlants();
+      console.log("getGardenPlants", this.getUserGarden())
+      //  this.getUserGarden();
     });
-
+    this.sub = this.route.paramMap.subscribe((params) => {
+      this.searchID = params.get('GardenName');
+      this.getDetailsService
+        .GetMyGardensDetails(this.searchID)
+        .subscribe((result: MyGarden) => {
+          this.searchedgarden = result;
+          console.log(result);
+        });
+    });
   }
 
-
+//works
   RemoveFromGarden(index: number): void {
-    this.gardenService
-      .DeleteMyGardens(this.listGardens[index].id)
-      .subscribe((result: MyGarden) => {
-        this.listGardens.splice(index, 1);
+    this.recentPlantsService
+      .DeleteMyGardensPlants(this.listPlants[index].id)
+      .subscribe((result: RecentPlants) => {
+        this.listPlants.splice(index, 1);
       });
   }
-  getGardenPlants():void{
-    this.recentPlants.getPlantedDetails(this.user.id, this.listPlants[0].gardenId).subscribe((result: RecentPlants[]) => {
-      this.listPlants = result;
-      console.log(this.listGardens)
+  getGardenPlants(): void {
+    // console.log('here', this.listPlants[0].id);
+    this.recentPlantsService
+      .getAllPlantedPlants(this.user.id)
+      .subscribe((result: RecentPlants[]) => {
+        this.listPlants = result;
+        console.log("list plants", this.listPlants);
       });
   }
 
-  // getUserGarden() {
-  //     this.gardenService
-  //       .GetMyGardens(this.user.id)
-  //       .subscribe((result: MyGarden[]) => {
-  //         this.listGardens = result;
-  //         console.log(this.listGardens)
-  //         });
-       
-  // }
+  getUserGarden() {
+      this.gardenService
+        .GetMyGardens(this.user.id)
+        .subscribe((result: MyGarden[]) => {
+          this.listGardens = result;
+          console.log(this.listGardens)
+          });
 
+  }
 }

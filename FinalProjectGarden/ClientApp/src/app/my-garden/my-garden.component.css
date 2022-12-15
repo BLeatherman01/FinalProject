@@ -29,7 +29,7 @@
   align-self: center;
   margin-bottom: 10px;
 }
-h3 {
+h3,h2 {
   color: white;
   font-size: 25px;
   display: flex;

@@ -81,14 +81,11 @@ export class SearchedPlantComponent implements OnInit {
       .subscribe((result: SearchImages) => {
         this.bingImageResults = result;
         for (let i: number = 0; i < this.plantList.length; i++) {
-         
           if (
             this.plantList[i].common_name ===
             this.bingImageResults.queryContext.originalQuery
           ) {
-            
             this.bingImageList[i] = this.bingImageResults.value[1].contentUrl;
-            
           }
         }
       });
