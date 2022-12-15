@@ -28,41 +28,6 @@ namespace FinalProjectGarden.Controllers
             return await _context.RecentPlants.Where(rp => rp.GardenId == favGardenId).ToArrayAsync();
         }
 
-
-
-        //// PUT: api/RecentPlants/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutRecentPlant(int id,  RecentPlant recentPlant, string googleId )
-        //{
-        //    int userId = (int)_context.Users.First(g => g.GoogleId == googleId).Id;
-        //    if (id != recentPlant.Id)
-        //    {
-        //        return BadRequest();
-        //    }
-        //    //recentPlant.GardenId = (int)_context.MyGardens.First(g => g.GardenName == gardenName).Id;
-
-        //    _context.Entry(recentPlant).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!RecentPlantExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
-
         [HttpGet("PlantsInGarden")]
         public async Task<ActionResult<IEnumerable<RecentPlant>>> GetAllPlanted(string googleId)
         {
@@ -109,11 +74,6 @@ namespace FinalProjectGarden.Controllers
         {
             RecentPlant recentPlant = plant;
             int userId = (int)_context.Users.First(g => g.GoogleId == googleId).Id;
-            //recentPlant.PlantDate = plantDate;
-            //recentPlant.PickBloom = pickBloom;
-            //recentPlant.WateringFreq = waterFreq;
-            //recentPlant.Season = season;
-            //recentPlant.GardenId = (int)_context.MyGardens.Where(g => g.GardenId == id).First().Id; 
             recentPlant.GardenId = (int)_context.MyGardens.First(g => g.GardenId == userId).Id;
             _context.RecentPlants.Update(recentPlant);
             await _context.SaveChangesAsync();
