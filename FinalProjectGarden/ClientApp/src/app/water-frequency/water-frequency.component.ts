@@ -85,7 +85,7 @@ export class WaterFrequencyComponent implements OnInit {
         (1000 * 60 * 60 * 24)
     );
 
-    if(difference > 0){
+    if(difference >= 0){
     }
    else if (difference % this.plantedPlants[i].wateringFreq! === 0) {
       let waterMe = 'water Me';
