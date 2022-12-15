@@ -37,6 +37,9 @@ export class RecentPlantsService {
   getAllPlantedPlants(googleid: string): Observable<RecentPlants[]>{
     return this.http.get<RecentPlants[]>(this.baseUrl + `api/RecentPlants/PlantsInGarden?googleId=${googleid}` );
   }
+  getPlantsInGarden(gardenId: number): Observable<RecentPlants[]>{
+    return this.http.get<RecentPlants[]>(this.baseUrl + `api/RecentPlants/PlantsInAGarden?gardenId=${gardenId}` );
+  }
    //working
   getPlantedDetails(googleId:string, id: number):Observable<RecentPlants[]>{
     console.log("garden Id", id)

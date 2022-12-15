@@ -47,6 +47,7 @@ export class WaterFrequencyComponent implements OnInit {
         .getAllPlantedPlants(this.user.id)
         .subscribe((result: RecentPlants[]) => {
           this.plantedPlants = result;
+          console.log("water result", result)
           this.getWaterDate();
 
           console.log(result);
@@ -64,9 +65,11 @@ export class WaterFrequencyComponent implements OnInit {
   //working
   getWaterDate() {
     let todaysDate: Date = new Date();
+   for(let i = 0; i <this.listGardens.length; i++){
 
-    let waterDate = new Date(this.plantedPlants[0].plantDate!);
-    console.log(waterDate);
+   
+    let waterDate = new Date(this.plantedPlants[i].plantDate!);
+    console.log("waterdate", waterDate);
     //need to get difference of plant and todays date
 
     let datePipe: DatePipe = new DatePipe('en-US');
@@ -86,10 +89,13 @@ export class WaterFrequencyComponent implements OnInit {
 
     console.log(datePipe.transform(todaysDate, 'shortDate'));
     console.log('differnce between dates', difference);
-
-    if (difference % this.plantedPlants[0].wateringFreq! === 0) {
+    if(difference > 0){
+      console.log("not planted")
+    }
+   else if (difference % this.plantedPlants[i].wateringFreq! === 0) {
       let waterMe = 'water Me';
       console.log(waterMe);
     }
+  }
   }
 }
