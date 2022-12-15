@@ -73,6 +73,7 @@ export class MyGardenComponent implements OnInit {
       )
       .subscribe((result: RecentPlants) => {
         this.listPlants[0] = result;
+        this.getUserGarden();
       });
   }
 //this works

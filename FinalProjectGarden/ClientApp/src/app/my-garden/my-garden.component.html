@@ -18,7 +18,7 @@
 				<div class="plant-list">
 					<p> Plant Name: {{plant.plantId}}</p> 
 					<p> Select Garden: <select [(ngModel)]="plant.gardenId" type="text">
-						<option *ngFor="let garden of listGardens">{{garden.id}}</option>
+						<option *ngFor="let garden of listGardens"[ngValue]="garden.id">{{garden.gardenName}}</option>
 					</select></p>
 					<p> Description: <input [(ngModel)]="description[i]" type="text"></p>
 					<p> Date Planted: <input [(ngModel)]="plantDate[i]" type="date" min="2022-12-07"></p>
