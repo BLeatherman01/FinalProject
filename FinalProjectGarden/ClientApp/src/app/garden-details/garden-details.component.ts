@@ -27,6 +27,7 @@ export class GardenDetailsComponent implements OnInit {
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
   showCard: boolean = false;
+  
   listPlants: RecentPlants[] = [];
   listGardens: MyGarden[] = [];
   
@@ -54,7 +55,7 @@ export class GardenDetailsComponent implements OnInit {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = user != null;
-       this.getGardenPlants();
+       
       console.log("getGardenPlants", this.getUserGarden())
       //  this.getUserGarden();
     });
@@ -65,6 +66,7 @@ export class GardenDetailsComponent implements OnInit {
         .subscribe((result: MyGarden) => {
           this.searchedgarden = result;
           console.log(result);
+          this.getGardenPlants();
         });
     });
   }
@@ -80,17 +82,17 @@ export class GardenDetailsComponent implements OnInit {
   getGardenPlants(): void {
     //  console.log('here', this.listPlants[0].id);
     this.recentPlantsService
-      .getAllPlantedPlants(this.user.id)
+      .getPlantsInGarden(this.searchedgarden.id)
       .subscribe((result: RecentPlants[]) => {
-      //  this.listPlants = result;
+       this.listPlants = result;
       //  console.log("what am I", this.listPlants)
-        for(let i = 0; i <= this.listPlants.length; i++ ){
-             if(result[i].gardenId === this.searchedgarden.id){
-              this.listPlants.push(result[i]);
-              console.log("what am i", result[i]);
-             }
+        // for(let i = 0; i <= this.listPlants.length; i++ ){
+        //      if(result[i].gardenId === this.searchedgarden.id){
+        //       this.listPlants.push(result[i]);
+        //       console.log("what am i", result[i]);
+        //      }
                 
-        }
+        // }
         console.log("list plants", this.listPlants);
       });
   }

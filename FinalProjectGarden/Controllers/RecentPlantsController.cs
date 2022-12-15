@@ -50,7 +50,14 @@ namespace FinalProjectGarden.Controllers
             return plantList;
 
         }
-     
+        [HttpGet("PlantsInAGarden")]
+        public async Task<ActionResult<IEnumerable<RecentPlant>>> GetAGarden(int gardenId)
+        {
+
+           return await _context.RecentPlants.Where(p => p.GardenId == gardenId).ToArrayAsync();
+
+        }
+
         // POST: api/RecentPlants/gardenId
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
