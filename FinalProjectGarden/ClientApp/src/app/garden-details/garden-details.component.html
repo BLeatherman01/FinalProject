@@ -6,8 +6,8 @@
                 <p> Plant: {{garden.plantId}}</p>
                 <!-- <p> Garden Name:{{garden.gardenName}} </p> -->
                 <!-- <p> Description: {{garden.description}} </p> -->
-                <p> Date Planted: {{garden.plantDate}}</p>
-                <p> Pick Bloom: {{garden.pickBloom}}</p>
+                <p> Date Planted: {{garden.plantDate | date}}</p>
+                <p> Pick Bloom: {{garden.pickBloom | date}}</p>
                 <p> Watering Frequency in days: {{garden.wateringFreq}}</p>
                 <p> Season: {{garden.season}}</p>
                 <button class="buttontester" (click)="RemoveFromGarden(i)">Remove plant</button>
