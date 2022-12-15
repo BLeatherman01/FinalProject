@@ -13,9 +13,8 @@
                 Favorites</button>
                 <!-- <asl-google-signin-button *ngIf="!loggedIn" type='icon' size='medium'>Click to Create an Account</asl-google-signin-button> -->
               
-            <button class="buttontester" (click)="getWikiDetail(p.common_name);">Learn more</button>
+            <button class="buttontester" (click)="getWikiDetail(p.scientific_name);">Learn more</button>
         </li>
     </ul>
-    <p class="wiki-item">{{wikiSnippet}}
-    </p>
+    <a class = "wiki-item" href="https://en.wikipedia.org/wiki/{{wikiName}}"> <div [innerHTML]="wikiSnippet" ></div></a>
 </div>
