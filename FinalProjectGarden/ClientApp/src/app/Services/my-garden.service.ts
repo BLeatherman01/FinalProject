@@ -29,10 +29,12 @@ export class MyGardenService {
   GetMyGardens(googleid: string): Observable<MyGarden[]> {
     return this.http.get<MyGarden[]>(this.baseUrl + `api/MyGardens/${googleid}`);
   }
-
-  UpdateMyGardens(id: number, plant: MyGarden): Observable<MyGarden> {
-    return this.http.put<MyGarden>(this.baseUrl + `api/MyGardens/${id}`, plant);
+  UpdateMyGardens(id: number, plant: RecentPlants, gardenName:string ): Observable<RecentPlants> {
+    return this.http.put<RecentPlants>(this.baseUrl + `api/RecentPlants/${id}&gardenName=${gardenName}`, plant);
   }
+  // UpdateMyGardens(id: number, plant: MyGarden): Observable<MyGarden> {
+  //   return this.http.put<MyGarden>(this.baseUrl + `api/MyGardens/${id}`, plant);
+  // }
 
   DeleteMyGardens(id: number): Observable<MyGarden> {
     return this.http.delete<MyGarden>(this.baseUrl + `api/MyGardens/${id}`);

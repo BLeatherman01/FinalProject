@@ -17,7 +17,13 @@
 			<li class="plant-detail" *ngFor="let plant of listPlants; index as i">
 				<div class="plant-list">
 					<p> Plant Name: {{plant.plantId}}</p> 
-					<p> Select Garden: <input [(ngModel)]="gardenName[i]" type="text"></p>
+					<p> Select Garden: <select [(ngModel)]="gardenName[i]" > 
+						<option>1</option>
+						<option>2</option>	
+						<option>3</option>				
+						<option>4</option>
+						<option>5</option>
+					</select> </p>
 					<p> Description: <input [(ngModel)]="description[i]" type="text"></p>
 					<p> Date Planted: <input [(ngModel)]="plantDate[i]" type="date" min="2022-12-07"></p>
 					<p> Pick Bloom: <input [(ngModel)]="pickDate[i]" type="date" min="2022-12-07"></p>
@@ -42,7 +48,7 @@
 		<h3>My Gardens</h3>
 		<ul class="list-items">
 			<li class="plant-list" *ngFor="let garden of listGardens; index as i">
-				<p *ngIf="">Garden Number: {{garden.gardenName}}</p>
+				<p>Garden Number: {{garden.gardenName}}</p>
 				<button class="buttontester" [routerLink]="['/GardenDetails',garden.gardenName]"> View More
 					Details!</button>
 				<button class="buttontester" (click)="RemoveFromGarden(i)">Remove Garden</button>

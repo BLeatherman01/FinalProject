@@ -49,11 +49,10 @@ export class MyGardenComponent implements OnInit {
     this.authService.authState.subscribe((user) => {
       this.user = user;
       this.loggedIn = user != null;
-   
+      this.getUserGarden();
+    });
+
     this.getMyFavPlant();
-    this.getUserGarden();
-  
-  });
   }
 
   UpdateGarden(index: number) {
@@ -66,9 +65,13 @@ export class MyGardenComponent implements OnInit {
     this.listPlants[index].season = this.season[index];
     this.listGardens[index].notes = this.notes[index];
     this.gardenService
-      .UpdateMyGardens(this.listGardens[index].id, this.listGardens[index])
-      .subscribe((result: MyGarden) => {
-        this.listGardens;
+      .UpdateMyGardens(
+        this.listPlants[index].id,
+        this.listPlants[index],
+        this.gardenName[index]
+      )
+      .subscribe((result: RecentPlants) => {
+        this.listPlants[0] = result;
       });
   }
 
@@ -101,20 +104,6 @@ export class MyGardenComponent implements OnInit {
       .GetMyGardens(this.user.id)
       .subscribe((result: MyGarden[]) => {
         this.listGardens = result;
-        //   //console.log("1"+ this.listGardens[0].plantId);
-        //   this.listGardens.forEach((pid: MyGarden) => {
-        //     //console.log(pid.plantId);
-        //     this.searchedPlantService
-        //       .getPlantById(pid.plantId)
-        //       .subscribe((result: Plant) => {
-        //         this.apiPlant.push(result);
-        //         this.apiPlant.forEach((plant: Plant) => {
-        //           this.hideCards.push(false);
-        //         });
-        //         //console.log("2"+ result.common_name);
-        //       });
-        //   });
-        // });
       });
   }
 }

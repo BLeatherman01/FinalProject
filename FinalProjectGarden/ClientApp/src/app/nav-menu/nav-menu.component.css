@@ -2,7 +2,7 @@
 } */
 
 .title {
-  font-size: 36px;
+  font-size: 24px;
   text-decoration: none;
 }
 .title:hover {
@@ -27,7 +27,7 @@
 
 .link {
   text-decoration: none;
-  font-size: 25px;
+  font-size: 18px;
   margin: 15px;
 }
 a:hover {
@@ -38,7 +38,7 @@ a:hover {
   list-style: none;
 }
 .item:last-of-type {
-  margin-left: 25px;
+  margin-left: 18px;
 }
 /* .link-button{
   color: white;

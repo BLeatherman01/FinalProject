@@ -7,6 +7,7 @@ import { SearchedPlantService } from '../Services/searched-plant.service';
 import { GardenDetailsService } from '../Services/garden-details.service';
 import { ActivatedRoute } from '@angular/router';
 import { RecentPlantsService } from '../Services/recent-plants.service';
+import { RecentPlants } from '../Services/recent-plants';
 
 @Component({
   selector: 'app-garden-details',
@@ -27,7 +28,7 @@ export class GardenDetailsComponent implements OnInit {
   user: SocialUser = {} as SocialUser;
   loggedIn: boolean = false;
   showCard: boolean = false;
-
+  listPlants: RecentPlants [] = [];
   listGardens: MyGarden[] = [];
   apiPlant: Plant[] = [];
   plantDate: Date[] = [];
@@ -51,8 +52,12 @@ export class GardenDetailsComponent implements OnInit {
   searchedgarden : MyGarden = {} as MyGarden;
 
   ngOnInit(): void {
-    // this.getUserGarden()
-
+    
+  this.authService.authState.subscribe((user) => {
+      this.user = user;
+      this.loggedIn = user != null; 
+    this.getGardenPlants()
+  });
     this.sub = this.route.paramMap.subscribe((params) =>{
       this.searchID = params.get('GardenName');
       this.getDetailsService.GetMyGardensDetails(this.searchID).subscribe((result : MyGarden) => {this.searchedgarden = result; console.log(result)});
@@ -68,34 +73,21 @@ export class GardenDetailsComponent implements OnInit {
         this.listGardens.splice(index, 1);
       });
   }
-
-
-  getUserGarden() {
-    this.authService.authState.subscribe((user) => {
-      this.user = user;
-      this.loggedIn = user != null;
-      this.gardenService
-        .GetMyGardens(this.user.id)
-        .subscribe((result: MyGarden[]) => {
-          this.listGardens = result;
-          console.log(this.listGardens)
-          // this.listGardens[i].gardenName?.search()
-
-          //console.log("1"+ this.listGardens[0].plantId);
-          // this.listGardens.forEach((pid: MyGarden) => {
-          //   //console.log(pid.plantId);
-          //   this.searchedPlantService
-          //     .getPlantById(pid.plantId)
-          //     .subscribe((result: Plant) => {
-          //       console.log(this.apiPlant)
-          //       this.apiPlant.push(result);
-          //       this.apiPlant.forEach((plant: Plant) => {
-          //       this.hideCards.push(false);
-          //       });
-          //       //console.log("2"+ result.common_name);
-          //     });
-          });
-        });
+  getGardenPlants():void{
+    this.recentPlants.getPlantedDetails(this.user.id, this.listPlants[0].gardenId).subscribe((result: RecentPlants[]) => {
+      this.listPlants = result;
+      console.log(this.listGardens)
+      });
   }
+
+  // getUserGarden() {
+  //     this.gardenService
+  //       .GetMyGardens(this.user.id)
+  //       .subscribe((result: MyGarden[]) => {
+  //         this.listGardens = result;
+  //         console.log(this.listGardens)
+  //         });
+       
+  // }
 
 }

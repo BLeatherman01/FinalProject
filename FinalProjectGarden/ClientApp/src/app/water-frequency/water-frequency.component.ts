@@ -59,19 +59,6 @@ export class WaterFrequencyComponent implements OnInit {
       .GetMyGardens(this.user.id)
       .subscribe((result: MyGarden[]) => {
         this.listGardens = result;
-        //console.log("1"+ this.listGardens[0].plantId);
-        // this.listGardens.forEach((pid: MyGarden) => {
-        //   //console.log(pid.plantId);
-        //   this.searchedPlantService
-        //     .getPlantById(pid.plantId)
-        //     .subscribe((result: Plant) => {
-        //       this.apiPlant.push(result);
-        //       this.apiPlant.forEach((plant: Plant) => {
-        //         this.hideCards.push(false);
-        //       });
-        //       //console.log("2"+ result.common_name);
-        //     });
-        // });
       });
   }
 

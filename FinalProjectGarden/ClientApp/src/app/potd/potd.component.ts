@@ -92,9 +92,9 @@ export class POTDComponent implements OnInit {
   }
 
 
-  AddToGarden(plant: Plant, imageurl: string): void {
+  AddToGarden(commonName: Plant, imageurl: string): void {
     this.recentPlants
-      .AddPlantToFavorite(plant.id,imageurl, this.user.id)
+      .AddPlantToFavorite(commonName.common_name,imageurl, this.user.id)
       .subscribe((result: RecentPlants) => {
         console.log(result);
       });

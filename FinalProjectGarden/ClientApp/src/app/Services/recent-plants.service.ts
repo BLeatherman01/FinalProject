@@ -20,7 +20,10 @@ export class RecentPlantsService {
       {}
     );
   }
-
+  
+  UpdateMyGardens(id: number, plant: MyGarden): Observable<MyGarden> {
+    return this.http.put<MyGarden>(this.baseUrl + `api/MyGardens/${id}`, plant);
+  }
   getMyFavPlants(googleid: string): Observable<RecentPlants[]> {
     return this.http.get<RecentPlants[]>(this.baseUrl + `api/RecentPlants?googleId=${googleid}`);
   }
@@ -28,5 +31,8 @@ export class RecentPlantsService {
   getAllPlantedPlants(googleid: string): Observable<RecentPlants[]>{
     return this.http.get<RecentPlants[]>(this.baseUrl + `api/RecentPlants/PlantsInGarden?googleId=${googleid}` )
   }
-
+   
+  getPlantedDetails(googleId:string, gardenId: number):Observable<RecentPlants[]>{
+    return this.http.get<RecentPlants[]>(this.baseUrl + `api/RecentPlants/?googleId=${googleId}&gardenId${gardenId}` )
+  }
 }

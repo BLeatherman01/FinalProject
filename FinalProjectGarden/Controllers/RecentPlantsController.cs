@@ -68,7 +68,7 @@ namespace FinalProjectGarden.Controllers
             int userId = (int)_context.Users.First(g => g.GoogleId == googleId).Id;
             List<int> gardenId = new List<int>(); 
             List<MyGarden> gardenList = _context.MyGardens.Where(g => g.GardenId == userId).ToList(); 
-            for(int i = 1; i < gardenList.Count; i++)
+            for(int i = 0; i < gardenList.Count; i++)
             {
                 gardenId.Add((int)gardenList[i].Id);
 
@@ -83,6 +83,35 @@ namespace FinalProjectGarden.Controllers
             return plantList;
 
         }
+        //[HttpGet("PlantedDetails")]
+        //public async Task<ActionResult<IEnumerable<RecentPlant>>> GetPlantedDetails(string googleId, int gardenId)
+        //{
+        //    //this finds user by googleId
+        //    int userId = (int)_context.Users.First(g => g.GoogleId == googleId).Id;
+
+        //    List<int> gardenDetails = new List<int>();
+
+        //    List<MyGarden> gardenList = _context.MyGardens.Where(g => g.Id == gardenId).ToList();
+            
+        //    for (int i = 0; i < gardenList.Count; i++)
+        //    {
+        //        gardenDetails.Add((int)gardenList[i].Id);
+
+        //    }
+        //    List<MyGarden>eachPlant = new List<MyGarden>();
+
+        //    eachPlant = gardenDetails.Where(gd => gd.)
+            
+        //        List<RecentPlant> plantList = new List<RecentPlant>();
+            
+        //    foreach (int id in gardenDetails)
+        //    {
+        //        plantList.AddRange(_context.RecentPlants.Where(p => p.GardenId == id ));
+        //    }
+
+        //    return plantList ;
+
+        //}
 
         // POST: api/RecentPlants/gardenId
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754

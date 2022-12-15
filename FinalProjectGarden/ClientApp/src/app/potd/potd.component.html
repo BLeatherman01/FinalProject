@@ -1,11 +1,11 @@
-<h1>Random Plant!</h1>
+<h1>Plant of The Day</h1>
 <div class="item-container">
     <ul class="list-items">
         <li class="searchedplantz" *ngFor="let p of list">
             <img src="{{bingImageList[0]}}">
-            <p>Name: {{p.common_name}} </p>
-            <p>Family: {{p.family}}</p>
-            <button class="buttontester" type="button" (click)="AddToGarden(p,bingImageList[0])">Add to
+            <p class="plant-info">Name: {{p.common_name}} </p>
+            <p class="plant-info">Family: {{p.family}}</p>
+            <button *ngIf="loggedIn" class="buttontester" type="button" (click)="AddToGarden(p,bingImageList[0])">Add to
                 Favorites!</button>
         </li>
     </ul>
