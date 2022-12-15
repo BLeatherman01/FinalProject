@@ -85,6 +85,18 @@ namespace FinalProjectGarden.Controllers
             return CreatedAtAction("GetMyGarden", new { id = myGarden.Id }, myGarden);
         }
 
+        [HttpPost("Favorite")]
+        public async Task<ActionResult<MyGarden>> PostMakeFav(string googleId, MyGarden garden)
+        {
+            garden.Id = null;
+            garden.GardenId = (int)_context.Users.First(u => u.GoogleId == googleId).Id;
+            _context.MyGardens.Add(garden);
+
+            await _context.SaveChangesAsync();
+            return CreatedAtAction("GetMyGarden", new { id = garden.Id }, garden);
+        }
+
+
         // DELETE: api/MyGardens/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMyGarden(int id)
