@@ -41,11 +41,7 @@ export class GardenDetailsComponent implements OnInit {
   notes: string[] = [];
   hideCards: boolean[] = [];
 
-  // this.sub = this.route.paramMap.subscribe((params) => {
-  //   this.searchID = params.get('id');
-  //   this.helpdeskAPI.getSpecificTicket(this.searchID).subscribe((result : Ticket) => {this.tickets.push(result)});
-  //   });
-  // GetMyGardensDetails
+  
 
   searchID: any;
   sub: any;
@@ -80,19 +76,11 @@ export class GardenDetailsComponent implements OnInit {
       });
   }
   getGardenPlants(): void {
-    //  console.log('here', this.listPlants[0].id);
+    
     this.recentPlantsService
       .getPlantsInGarden(this.searchedgarden.id)
       .subscribe((result: RecentPlants[]) => {
        this.listPlants = result;
-      //  console.log("what am I", this.listPlants)
-        // for(let i = 0; i <= this.listPlants.length; i++ ){
-        //      if(result[i].gardenId === this.searchedgarden.id){
-        //       this.listPlants.push(result[i]);
-        //       console.log("what am i", result[i]);
-        //      }
-                
-        // }
         console.log("list plants", this.listPlants);
       });
   }

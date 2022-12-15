@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   width: 80%;
-  height: 77%;
+  height: auto;
   background-color: rgba(0, 0, 0, 0.6);
   padding: 40px;
   border-radius: 8px;
@@ -17,19 +17,26 @@
 .garden-container{
   display: flex;
   flex-direction: column;
+  justify-content: center;
   width: 80%;
-  height: 77%;
+  height: auto;
   background-color: rgba(0, 0, 0, 0.6);
   padding: 40px;
   border-radius: 8px;
   margin: 0 auto;
-
+  overflow-y: auto;
 }
 .input-container {
   align-self: center;
   margin-bottom: 10px;
 }
-h3,h2 {
+h2,h3 {
+  color: white;
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+}
+.my-garden{
   color: white;
   font-size: 25px;
   display: flex;
@@ -70,7 +77,7 @@ h3,h2 {
 .list-items {
   display: flex;
   /* flex-wrap: wrap; */
-  /* justify-content: space-evenly; */
+  justify-content: center;
   margin: 0;
   padding: 0;
   overflow-y: auto;
@@ -99,11 +106,7 @@ h3,h2 {
   justify-content: last baseline;
   display: flex;
 }
-.user-name {
-  color: white;
-  justify-content: left;
-  font-size: 25px;
-}
+
 .plant-detail{
 
   list-style: none;
